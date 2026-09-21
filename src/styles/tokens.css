@@ -1,0 +1,94 @@
+/* ==========================================================================
+   AVERRA v2 — Design Tokens & CSS Custom Properties
+   Aesthetic: Warm Editorial Technology Studio
+   ========================================================================== */
+
+:root {
+  /* Surface & Background Colors */
+  --bg-primary: #FCFBF8;       /* Warm White / Alabaster */
+  --bg-secondary: #F7F5EE;     /* Soft Linen / Card background */
+  --bg-tertiary: #EFECE3;      /* Muted Warm Stone */
+  --bg-card: #FFFFFF;          /* Pure Card White */
+  --bg-elevated: #FCFBF8;
+  --bg-hover: #F2EFE6;
+
+  /* Dark Contrast Surfaces (Architectural dark sections & badges) */
+  --bg-dark: #121413;
+  --bg-dark-subtle: #1C1F1E;
+  --bg-dark-card: #1E2220;
+  --border-dark-box: rgba(232, 229, 222, 0.12);
+
+  /* Typography Colors */
+  --text-primary: #141615;     /* Deep Charcoal / Near Black */
+  --text-secondary: #58554F;   /* Refined Warm Gray */
+  --text-tertiary: #87847C;    /* Muted Labels & Captions */
+  --text-muted: #A3A097;       /* Low-contrast Hairline info */
+  --text-inverse: #FCFBF8;     /* Warm White on dark surfaces */
+  --text-inverse-secondary: #B5B2A8;
+
+  /* Restrained Dark Blue Accent (Per v2 Brand Direction) */
+  --accent-blue: #1E3A8A;
+  --accent-blue-hover: #172554;
+  --accent-blue-subtle: #EFF3FC;
+  --accent-blue-border: rgba(30, 58, 138, 0.18);
+
+  /* Hairlines & Borders */
+  --border-light: #E8E5DE;     /* Warm Neutral Hairline Border */
+  --border-subtle: #F1EFE8;
+  --border-medium: #D5D1C7;
+  --border-dark: #2A2E2C;
+  --border-focus: #141615;
+
+  /* Typography Families */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, Monaco, monospace;
+
+  /* Typography Scale */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.8125rem;  /* 13px */
+  --text-base: 0.9375rem;/* 15px */
+  --text-md: 1rem;       /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.375rem;   /* 22px */
+  --text-2xl: 1.75rem;   /* 28px */
+  --text-3xl: 2.25rem;   /* 36px */
+  --text-4xl: 3rem;      /* 48px */
+  --text-5xl: clamp(2.75rem, 5.5vw, 4.5rem);
+  --text-hero: clamp(3rem, 7vw, 5.75rem);
+
+  /* Spacing Scale */
+  --spacing-2xs: 0.25rem; /* 4px */
+  --spacing-xs: 0.5rem;   /* 8px */
+  --spacing-sm: 0.75rem;  /* 12px */
+  --spacing-md: 1rem;     /* 16px */
+  --spacing-lg: 1.5rem;   /* 24px */
+  --spacing-xl: 2rem;     /* 32px */
+  --spacing-2xl: 3rem;    /* 48px */
+  --spacing-3xl: 4.5rem;  /* 72px */
+  --spacing-4xl: 6rem;    /* 96px */
+  --spacing-5xl: 8rem;    /* 128px */
+
+  /* Layout Widths */
+  --container-max: 1240px;
+  --container-narrow: 880px;
+  --header-height: 72px;
+
+  /* Shape & Corner Radii (Restrained, architectural) */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Subtle Warm Shadows */
+  --shadow-subtle: 0 1px 2px rgba(20, 22, 21, 0.04);
+  --shadow-card: 0 4px 20px rgba(20, 22, 21, 0.03);
+  --shadow-hover: 0 12px 32px rgba(20, 22, 21, 0.06);
+
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
