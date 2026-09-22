@@ -56,6 +56,9 @@
   --text-4xl: 3rem;      /* 48px */
   --text-5xl: clamp(2.75rem, 5.5vw, 4.5rem);
   --text-hero: clamp(3rem, 7vw, 5.75rem);
+  --text-hero-giant: clamp(4.5rem, 9vw, 9.5rem);
+  --text-hero-giant-tablet: clamp(3.25rem, 7.5vw, 5.5rem);
+  --text-hero-giant-mobile: clamp(2.35rem, 8vw, 3.5rem);
 
   /* Spacing Scale */
   --spacing-2xs: 0.25rem; /* 4px */
@@ -87,8 +90,19 @@
   --shadow-card: 0 4px 20px rgba(20, 22, 21, 0.03);
   --shadow-hover: 0 12px 32px rgba(20, 22, 21, 0.06);
 
+  /* Motion Easings & Curves (inspiration.md) */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-physical: cubic-bezier(0.19, 1, 0.22, 1);
+
+  /* Motion Durations */
+  --duration-fast: 0.2s;
+  --duration-normal: 0.48s;
+  --duration-slow: 0.85s;
+
   /* Transitions */
-  --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.15s var(--ease-out);
+  --transition-normal: 0.25s var(--ease-out);
+  --transition-smooth: 0.48s var(--ease-out);
 }
+

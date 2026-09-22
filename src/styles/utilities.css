@@ -470,29 +470,96 @@
   color: var(--text-inverse);
 }
 
-/* 10. Header Navigation Visibility */
-@media (max-width: 768px) {
-  .desktop-nav {
-    display: none !important;
-  }
-  .desktop-header-cta {
-    display: none !important;
-  }
-  .mobile-menu-toggle {
-    display: flex !important;
-  }
+/* 10. Editorial Header Navigation (14islands Inspired Horizontal Layout) */
+.global-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: var(--header-height);
+  z-index: 100;
+  will-change: transform;
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
 }
 
-@media (min-width: 769px) {
-  .mobile-menu-toggle {
-    display: none !important;
-  }
-  .desktop-nav {
-    display: flex !important;
-  }
+.global-header.scrolled {
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-light);
 }
 
-/* Nav Link Hover & Active Underline */
+.header-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: clamp(1.25rem, 4vw, 4.5rem);
+  padding-right: clamp(1.25rem, 4vw, 4.5rem);
+}
+
+/* Brand / Logo (Anchored firmly left) */
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.header-brand-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-xs);
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.header-brand-text {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+/* Right cluster: Nav items + Integrated CTA */
+.header-nav-cluster {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+}
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+
+.nav-link {
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--text-secondary);
+  position: relative;
+  padding: 0.25rem 0;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary);
+}
+
 .nav-link::after {
   content: "";
   position: absolute;
@@ -507,6 +574,68 @@
 .nav-link:hover::after,
 .nav-link.active::after {
   width: 100%;
+}
+
+/* Integrated Editorial CTA (Understated, integrated, no pill) */
+.header-editorial-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  position: relative;
+  letter-spacing: -0.01em;
+  transition: color var(--transition-fast);
+}
+
+.header-editorial-cta .header-cta-arrow {
+  transition: transform var(--transition-fast);
+}
+
+.header-editorial-cta:hover {
+  color: var(--accent-blue);
+}
+
+.header-editorial-cta:hover .header-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  color: var(--text-primary);
+  background: transparent;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .desktop-cta {
+    display: none !important;
+  }
+  .mobile-menu-toggle {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-menu-toggle {
+    display: none !important;
+  }
+  .desktop-nav {
+    display: flex !important;
+  }
+  .desktop-cta {
+    display: inline-flex !important;
+  }
 }
 
 /* 11. Editorial Studio Utilities (14islands Inspired) */
@@ -617,4 +746,223 @@
 .process-step-node.active {
   border-top-color: var(--text-primary);
 }
+
+/* ==========================================================================
+   Hero Section — Viewport-Scale Asymmetrical Editorial Composition
+   ========================================================================== */
+.hero-editorial-section {
+  width: 100%;
+  position: relative;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-light);
+  padding: clamp(2rem, 3.5vw, 3.25rem) clamp(1.25rem, 4vw, 4.5rem) clamp(3.5rem, 6vw, 6rem);
+  overflow: hidden;
+}
+
+.hero-top-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: clamp(2rem, 4.5vw, 3.75rem);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.hero-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.hero-meta-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent-blue);
+}
+
+.hero-meta-divider {
+  color: var(--border-medium);
+}
+
+.hero-headline-wrap {
+  margin-bottom: clamp(2.75rem, 5.5vw, 4.75rem);
+  width: 100%;
+}
+
+.hero-giant-title {
+  font-family: var(--font-display);
+  font-size: var(--text-hero-giant);
+  font-weight: 750;
+  line-height: 0.90;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  margin: 0;
+  width: 100%;
+}
+
+.hero-headline-line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero-headline-line.hero-line-1 {
+  text-align: left;
+}
+
+.hero-headline-line.hero-line-2 {
+  text-align: left;
+}
+
+.hero-headline-line.hero-line-3 {
+  text-align: left;
+  padding-left: clamp(2.5rem, 16vw, 28vw);
+}
+
+.hero-accent-dot {
+  color: var(--accent-blue);
+}
+
+.hero-lower-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .hero-lower-grid {
+    grid-template-columns: 5fr 7fr;
+    gap: clamp(3rem, 5vw, 5.5rem);
+  }
+}
+
+.hero-editorial-col {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 2.5vw, 2.25rem);
+  max-width: 580px;
+}
+
+.hero-editorial-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+}
+
+.hero-editorial-lead {
+  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.hero-editorial-lead strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+.hero-work-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.hero-work-link:hover {
+  color: var(--accent-blue);
+  border-bottom-color: var(--accent-blue);
+  gap: 0.75rem;
+}
+
+.hero-discipline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.hero-tag-item {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hero-media-col {
+  width: 100%;
+  position: relative;
+}
+
+.hero-bottom-strip {
+  margin-top: clamp(3rem, 6vw, 5.5rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1024px) {
+  .hero-giant-title {
+    font-size: var(--text-hero-giant-tablet);
+    line-height: 0.92;
+  }
+  .hero-headline-line.hero-line-3 {
+    padding-left: clamp(1.5rem, 10vw, 16vw);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-giant-title {
+    font-size: var(--text-hero-giant-mobile);
+    line-height: 0.94;
+    letter-spacing: -0.03em;
+  }
+  .hero-headline-line.hero-line-3 {
+    padding-left: 0;
+  }
+  .hero-meta-item.desktop-only {
+    display: none !important;
+  }
+}
+
 

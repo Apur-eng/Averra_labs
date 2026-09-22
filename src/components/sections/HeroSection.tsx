@@ -1,194 +1,211 @@
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { ArrowRight, ArrowDownRight } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { IntroMedia } from '../ui/IntroMedia';
 
 export const HeroSection: React.FC = () => {
+  const containerRef = useRef<HTMLElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  // Subtle scroll-driven parallax (restrained, architectural)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end start']
+  });
+
+  const headlineY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    shouldReduceMotion ? [0, 0] : [0, -28]
+  );
+
+  const mediaY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    shouldReduceMotion ? [0, 0] : [0, 18]
+  );
+
+  // Easing curve: restrained architectural editorial rhythm
+  const transitionConfig = shouldReduceMotion
+    ? { duration: 0 }
+    : { duration: 0.85, ease: [0.16, 1, 0.3, 1] };
+
+  const lineVariants = {
+    hidden: { y: '100%', opacity: 0 },
+    visible: (custom: number) => ({
+      y: 0,
+      opacity: 1,
+      transition: {
+        ...transitionConfig,
+        delay: shouldReduceMotion ? 0 : custom * 0.12
+      }
+    })
+  };
+
+  const fadeVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 14 },
+    visible: (custom: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        ...transitionConfig,
+        delay: shouldReduceMotion ? 0 : custom * 0.14
+      }
+    })
+  };
+
   return (
-    <section
-      className="hero-section"
-      style={{
-        paddingTop: 'clamp(3rem, 6vw, 5.5rem)',
-        paddingBottom: 'clamp(4rem, 8vw, 7rem)',
-        borderBottom: '1px solid var(--border-light)',
-        position: 'relative',
-        backgroundColor: 'var(--bg-primary)'
-      }}
-    >
-      <div className="container">
-        {/* Top Studio Identification Pill */}
-        <div
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.625rem',
-            padding: '0.375rem 0.875rem',
-            backgroundColor: 'var(--bg-card)',
-            border: '1px solid var(--border-light)',
-            borderRadius: 'var(--radius-full)',
-            fontFamily: 'var(--font-mono)',
-            fontSize: 'var(--text-xs)',
-            fontWeight: 500,
-            letterSpacing: '0.06em',
-            textTransform: 'uppercase',
-            color: 'var(--text-secondary)',
-            marginBottom: 'clamp(1.5rem, 3vw, 2.5rem)',
-            boxShadow: 'var(--shadow-subtle)'
-          }}
-        >
-          <span
-            style={{
-              width: '6px',
-              height: '6px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--accent-blue)',
-              boxShadow: '0 0 6px rgba(30, 58, 138, 0.4)'
-            }}
-          />
-          <span>Digital Product & Technology Studio</span>
-          <span style={{ color: 'var(--border-medium)' }}>//</span>
-          <span style={{ color: 'var(--text-muted)' }}>Active Q3/Q4</span>
+    <section ref={containerRef} className="hero-editorial-section" id="hero">
+      {/* 1. Top Studio Interface Metadata Row */}
+      <motion.div
+        className="hero-top-strip"
+        initial="hidden"
+        animate="visible"
+        custom={0}
+        variants={fadeVariants}
+      >
+        <div className="hero-meta-item">
+          <span className="hero-meta-dot" />
+          <span>STUDIO // 01</span>
+          <span className="hero-meta-divider">/</span>
+          <span>DIGITAL PRODUCT ENGINEERING</span>
         </div>
 
-        {/* Primary Large Editorial Statement */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr',
-            gap: 'clamp(1.5rem, 3vw, 2.5rem)',
-            maxWidth: '1080px',
-            marginBottom: 'clamp(2.5rem, 5vw, 4.5rem)'
-          }}
+        <div className="hero-meta-item desktop-only">
+          <span>“WE BUILD. YOU GROW.”</span>
+          <span className="hero-meta-divider">/</span>
+          <span>AVAILABILITY: Q3/Q4</span>
+        </div>
+
+        <div className="hero-meta-item desktop-only">
+          <span>COORD // 28°36'N 77°12'E</span>
+        </div>
+      </motion.div>
+
+      {/* 2. Controlled Asymmetric Hero Headline */}
+      <motion.div
+        className="hero-headline-wrap"
+        style={{ y: headlineY }}
+        initial="hidden"
+        animate="visible"
+      >
+        <h1 className="hero-giant-title">
+          {/* Line 1: Left-anchored */}
+          <span className="hero-headline-line hero-line-1">
+            <motion.span
+              style={{ display: 'inline-block' }}
+              custom={1}
+              variants={lineVariants}
+            >
+              DIGITAL
+            </motion.span>
+          </span>
+
+          {/* Line 2: Left-anchored */}
+          <span className="hero-headline-line hero-line-2">
+            <motion.span
+              style={{ display: 'inline-block' }}
+              custom={2}
+              variants={lineVariants}
+            >
+              PRODUCTS
+            </motion.span>
+          </span>
+
+          {/* Line 3: Deliberately indented horizontal asymmetry */}
+          <span className="hero-headline-line hero-line-3">
+            <motion.span
+              style={{ display: 'inline-block' }}
+              custom={3}
+              variants={lineVariants}
+            >
+              BUILT TO GROW<span className="hero-accent-dot">.</span>
+            </motion.span>
+          </span>
+        </h1>
+      </motion.div>
+
+      {/* 3. Lower Asymmetrical Grid: Editorial Statement & Intro Media */}
+      <div className="hero-lower-grid">
+        {/* Left Column: Separated Editorial Statement, CTAs, Discipline Badges */}
+        <motion.div
+          className="hero-editorial-col"
+          initial="hidden"
+          animate="visible"
+          custom={4}
+          variants={fadeVariants}
         >
-          <h1
-            className="hero-title"
-            style={{
-              fontSize: 'var(--text-hero)',
-              fontWeight: 700,
-              lineHeight: 1.02,
-              letterSpacing: '-0.045em',
-              color: 'var(--text-primary)',
-              margin: 0
-            }}
-          >
-            We build.{' '}
-            <br />
-            <span style={{ color: 'var(--accent-blue)' }}>You grow.</span>
-          </h1>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: 'clamp(1.5rem, 3vw, 3rem)',
-              alignItems: 'end',
-              paddingTop: '0.5rem'
-            }}
-          >
-            <p
-              className="lead-text"
-              style={{
-                fontSize: 'clamp(1.0625rem, 1.4vw, 1.25rem)',
-                lineHeight: 1.6,
-                color: 'var(--text-secondary)',
-                margin: 0,
-                maxWidth: '560px'
-              }}
-            >
-              Averra is an independent digital product studio partnering with founders and ambitious teams.
-              We combine <strong>product strategy</strong>, <strong>editorial design</strong>, and{' '}
-              <strong>systems engineering</strong> to build enduring software that commands authority and drives measurable revenue.
-            </p>
-
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '0.875rem',
-                alignItems: 'center'
-              }}
-            >
-              <Button
-                to="/contact"
-                variant="primary"
-                size="lg"
-                icon={<ArrowRight size={18} />}
-              >
-                Start a Project
-              </Button>
-              <Button
-                to="#work"
-                variant="secondary"
-                size="lg"
-                onClick={(e) => {
-                  const target = document.getElementById('work');
-                  if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-              >
-                View Our Work
-              </Button>
-            </div>
+          <div className="hero-editorial-badge">
+            <span>01 // PERSPECTIVE</span>
+            <span className="hero-meta-divider">—</span>
+            <span>MEASURED LONGEVITY</span>
           </div>
-        </div>
 
-        {/* 01 — INTRO: Dedicated Cinematic Media Frame */}
-        <div style={{ marginBottom: 'clamp(3rem, 6vw, 5rem)' }}>
+          <p className="hero-editorial-lead">
+            Averra is an independent product and systems engineering studio partnering with founders and ambitious organizations. 
+            We combine <strong>strategic product thinking</strong>, <strong>editorial design craft</strong>, and <strong>hardened engineering</strong> to build enduring software that commands authority.
+          </p>
+
+          {/* Subtle CTAs */}
+          <div className="hero-actions">
+            <Button
+              to="/contact"
+              variant="primary"
+              size="md"
+              icon={<ArrowRight size={16} />}
+            >
+              Start a Project
+            </Button>
+
+            <a
+              href="#work"
+              className="hero-work-link"
+              onClick={(e) => {
+                const target = document.getElementById('work');
+                if (target) {
+                  e.preventDefault();
+                  target.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
+              <span>View Selected Work</span>
+              <ArrowDownRight size={14} />
+            </a>
+          </div>
+
+          {/* Discipline Badges */}
+          <div className="hero-discipline-tags">
+            <span className="hero-tag-item">[ 01 STRATEGY ]</span>
+            <span className="hero-tag-item">[ 02 CRAFT & SYSTEMS ]</span>
+            <span className="hero-tag-item">[ 03 PRODUCTION ENGINEERING ]</span>
+          </div>
+        </motion.div>
+
+        {/* Right Column: Commanding Intro Media Viewport (Preserved Video Section) */}
+        <motion.div
+          className="hero-media-col"
+          style={{ y: mediaY }}
+          initial="hidden"
+          animate="visible"
+          custom={5}
+          variants={fadeVariants}
+        >
           <IntroMedia
             placeholderImage="/images/intro-monolith.jpg"
             label="INTRO VIDEO"
-            caption="Averra Cinematic Visual — 4K Monolith Experience (Future Media Slot)"
+            aspectRatio="16 / 9"
+            maxWidth="100%"
+            caption="Averra Cinematic Visual — 4K Monolith Master (Future Insertion Slot)"
           />
-        </div>
+        </motion.div>
+      </div>
 
-        {/* Architectural Discipline Matrix Strip */}
-        <div
-          style={{
-            paddingTop: 'clamp(1.5rem, 3vw, 2.5rem)',
-            borderTop: '1px solid var(--border-light)',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-            gap: 'clamp(1.25rem, 2.5vw, 2rem)'
-          }}
-        >
-          <div>
-            <div className="mono-tag" style={{ color: 'var(--accent-blue)', marginBottom: '0.375rem' }}>
-              01 / Strategy
-            </div>
-            <div style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
-              Product Thinking & Problem Framing
-            </div>
-            <p className="body-small" style={{ margin: 0, fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
-              Aligning technical architecture directly with commercial traction and user retention.
-            </p>
-          </div>
-
-          <div>
-            <div className="mono-tag" style={{ color: 'var(--accent-blue)', marginBottom: '0.375rem' }}>
-              02 / Design
-            </div>
-            <div style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
-              Editorial Craft & Design Systems
-            </div>
-            <p className="body-small" style={{ margin: 0, fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
-              High-contrast typography, restrained palettes, and purposeful micro-interactions.
-            </p>
-          </div>
-
-          <div>
-            <div className="mono-tag" style={{ color: 'var(--accent-blue)', marginBottom: '0.375rem' }}>
-              03 / Engineering
-            </div>
-            <div style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
-              Full-Stack & Edge Infrastructure
-            </div>
-            <p className="body-small" style={{ margin: 0, fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
-              Sub-second response times, relational data integrity, and production-ready APIs.
-            </p>
-          </div>
-        </div>
+      {/* 4. Bottom Technical Coordinate Strip */}
+      <div className="hero-bottom-strip">
+        <div>AVERRA STUDIO SYSTEM // EDITION 2026</div>
+        <div>SCALE // 1:1 ARCHITECTURAL GRID</div>
+        <div>ENDURING PRODUCTS ONLY</div>
       </div>
     </section>
   );

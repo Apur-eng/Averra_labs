@@ -14,6 +14,10 @@ export interface IntroMediaProps {
   caption?: string;
   /** Optional click handler or interactive preview */
   onPlayClick?: () => void;
+  /** Custom max-width override (defaults to 1240px) */
+  maxWidth?: string;
+  /** Custom style overrides */
+  style?: React.CSSProperties;
   className?: string;
 }
 
@@ -34,6 +38,8 @@ export const IntroMedia: React.FC<IntroMediaProps> = ({
   aspectRatio = '16 / 9',
   caption = 'Averra Cinematic Visual — 4K Framerate Master (Future Insertion Slot)',
   onPlayClick,
+  maxWidth,
+  style,
   className = ''
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -44,14 +50,15 @@ export const IntroMedia: React.FC<IntroMediaProps> = ({
       style={{
         position: 'relative',
         width: '100%',
-        maxWidth: '1240px',
-        margin: '0 auto',
+        maxWidth: maxWidth || '1240px',
+        margin: maxWidth ? '0' : '0 auto',
         borderRadius: 'var(--radius-sm)',
         overflow: 'hidden',
         border: '1px solid var(--border-medium)',
         backgroundColor: '#0E100F',
         boxShadow: '0 24px 60px rgba(18, 20, 19, 0.12)',
-        transition: 'border-color var(--transition-normal)'
+        transition: 'border-color var(--transition-normal)',
+        ...style
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

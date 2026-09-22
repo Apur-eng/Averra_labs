@@ -17,6 +17,11 @@ html {
   color: var(--text-primary);
 }
 
+html.lenis,
+html.lenis body {
+  scroll-behavior: auto !important;
+}
+
 body {
   font-family: var(--font-sans);
   font-weight: 400;
@@ -37,6 +42,7 @@ body {
 
 main {
   flex: 1 0 auto;
+  padding-top: var(--header-height);
 }
 
 img, svg, video {
