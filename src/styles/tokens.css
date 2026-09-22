@@ -1,43 +1,55 @@
 /* ==========================================================================
    AVERRA v2 — Design Tokens & CSS Custom Properties
-   Aesthetic: Warm Editorial Technology Studio
+   Aesthetic: Bright Editorial Technology Studio
+   Architecture: documents/inspiration.md & documents/architecture-prompt.md
    ========================================================================== */
 
 :root {
-  /* Surface & Background Colors */
-  --bg-primary: #FCFBF8;       /* Warm White / Alabaster */
-  --bg-secondary: #F7F5EE;     /* Soft Linen / Card background */
-  --bg-tertiary: #EFECE3;      /* Muted Warm Stone */
-  --bg-card: #FFFFFF;          /* Pure Card White */
-  --bg-elevated: #FCFBF8;
-  --bg-hover: #F2EFE6;
+  /* ==========================================================================
+     Surface & Background Colors (Brighter Neutral Off-White Foundation)
+     Target: #FAFAF8 — crisp, technical, editorial, non-yellow, non-muddy
+     ========================================================================== */
+  --bg-primary: #FAFAF8;       /* Primary Page Background: Bright Neutral Off-White */
+  --bg-secondary: #F4F4F1;     /* Secondary / Section Background: Very Soft Clean Neutral */
+  --bg-tertiary: #EBEBE7;      /* Tertiary / Subtle Fill: Crisp Pale Neutral */
+  --bg-card: #FFFFFF;          /* Pure Card White for crisp contrast against #FAFAF8 */
+  --bg-elevated: #FFFFFF;
+  --bg-hover: #ECECE8;         /* Neutral hover without yellow/beige stain */
 
   /* Dark Contrast Surfaces (Architectural dark sections & badges) */
   --bg-dark: #121413;
   --bg-dark-subtle: #1C1F1E;
   --bg-dark-card: #1E2220;
-  --border-dark-box: rgba(232, 229, 222, 0.12);
+  --border-dark-box: rgba(255, 255, 255, 0.08);
 
-  /* Typography Colors */
-  --text-primary: #141615;     /* Deep Charcoal / Near Black */
-  --text-secondary: #58554F;   /* Refined Warm Gray */
-  --text-tertiary: #87847C;    /* Muted Labels & Captions */
-  --text-muted: #A3A097;       /* Low-contrast Hairline info */
-  --text-inverse: #FCFBF8;     /* Warm White on dark surfaces */
-  --text-inverse-secondary: #B5B2A8;
+  /* Typography Colors (Near-black and neutral slate grays) */
+  --text-primary: #121312;     /* Deep Charcoal / Near Black */
+  --text-secondary: #4E5250;   /* Clean Neutral Editorial Slate Gray (no yellow cast) */
+  --text-tertiary: #767A78;    /* Muted Labels & Technical Captions */
+  --text-muted: #9DA19F;       /* Low-contrast Hairline Info */
+  --text-inverse: #FAFAF8;     /* Bright Off-White on dark surfaces */
+  --text-inverse-secondary: #A8ABA9;
 
-  /* Restrained Dark Blue Accent (Per v2 Brand Direction) */
+  /* Restrained Dark Blue Accent (Preserved per Brand Direction) */
   --accent-blue: #1E3A8A;
   --accent-blue-hover: #172554;
-  --accent-blue-subtle: #EFF3FC;
-  --accent-blue-border: rgba(30, 58, 138, 0.18);
+  --accent-blue-subtle: #EEF2FB;
+  --accent-blue-border: rgba(30, 58, 138, 0.16);
 
-  /* Hairlines & Borders */
-  --border-light: #E8E5DE;     /* Warm Neutral Hairline Border */
-  --border-subtle: #F1EFE8;
-  --border-medium: #D5D1C7;
+  /* Hairlines & Borders (Clean, very light neutral grays) */
+  --border-light: #E5E5E0;     /* Hairline Border: Crisp, neutral, no muddy brown */
+  --border-subtle: #EDEDE8;    /* Ultra-subtle hairline */
+  --border-medium: #CCCCCC;    /* Neutral medium divider */
   --border-dark: #2A2E2C;
-  --border-focus: #141615;
+  --border-focus: #121312;
+
+  /* Architectural Design System Aliases */
+  --color-bg: var(--bg-primary);
+  --color-fg: var(--text-primary);
+  --color-muted: var(--text-secondary);
+  --color-border: var(--border-light);
+  --color-accent: var(--accent-blue);
+  --color-surface: var(--bg-card);
 
   /* Typography Families */
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -56,9 +68,9 @@
   --text-4xl: 3rem;      /* 48px */
   --text-5xl: clamp(2.75rem, 5.5vw, 4.5rem);
   --text-hero: clamp(3rem, 7vw, 5.75rem);
-  --text-hero-giant: clamp(4.5rem, 9vw, 9.5rem);
-  --text-hero-giant-tablet: clamp(3.25rem, 7.5vw, 5.5rem);
-  --text-hero-giant-mobile: clamp(2.35rem, 8vw, 3.5rem);
+  --text-hero-giant: clamp(3.75rem, 8vw, 7.5rem);
+  --text-hero-giant-tablet: clamp(2.85rem, 6.5vw, 4.5rem);
+  --text-hero-giant-mobile: clamp(2.25rem, 8.5vw, 3.25rem);
 
   /* Spacing Scale */
   --spacing-2xs: 0.25rem; /* 4px */
@@ -85,10 +97,10 @@
   --radius-xl: 16px;
   --radius-full: 9999px;
 
-  /* Subtle Warm Shadows */
-  --shadow-subtle: 0 1px 2px rgba(20, 22, 21, 0.04);
-  --shadow-card: 0 4px 20px rgba(20, 22, 21, 0.03);
-  --shadow-hover: 0 12px 32px rgba(20, 22, 21, 0.06);
+  /* Subtle Crisp Shadows */
+  --shadow-subtle: 0 1px 2px rgba(18, 19, 18, 0.03);
+  --shadow-card: 0 4px 20px rgba(18, 19, 18, 0.03);
+  --shadow-hover: 0 12px 32px rgba(18, 19, 18, 0.05);
 
   /* Motion Easings & Curves (inspiration.md) */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -97,12 +109,11 @@
 
   /* Motion Durations */
   --duration-fast: 0.2s;
-  --duration-normal: 0.48s;
+  --duration-normal: 0.4s;
   --duration-slow: 0.85s;
 
   /* Transitions */
   --transition-fast: 0.15s var(--ease-out);
   --transition-normal: 0.25s var(--ease-out);
-  --transition-smooth: 0.48s var(--ease-out);
+  --transition-smooth: 0.4s var(--ease-out);
 }
-

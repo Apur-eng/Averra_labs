@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useRef, useState } from 'react';
+import React, { createContext, useEffect, useRef, useState, useCallback } from 'react';
 import Lenis from 'lenis';
 import { useLocation } from 'react-router-dom';
 import { useReducedMotionPreference } from '../reducedMotion';
@@ -17,6 +17,18 @@ export interface LenisProviderProps {
   children: React.ReactNode;
 }
 
+/**
+ * Global Lenis Smooth Scrolling Provider.
+ * 
+ * Performance & Architecture Guarantees:
+ * 1. Exactly ONE global Lenis instance across the entire application lifecycle.
+ * 2. Driven by exactly ONE centralized requestAnimationFrame loop.
+ * 3. Fully respects `prefers-reduced-motion`:
+ *    - Automatically sets duration: 0 and smoothWheel: false.
+ *    - Leaves native, instant browser scrolling intact for users requesting reduced motion.
+ * 4. Automatic immediate scroll reset to top (0, 0) upon React Router route transitions.
+ * 5. Complete, leak-free teardown canceling RAF and destroying the Lenis instance on unmount.
+ */
 export const LenisProvider: React.FC<LenisProviderProps> = ({ children }) => {
   const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
   const location = useLocation();
@@ -24,7 +36,7 @@ export const LenisProvider: React.FC<LenisProviderProps> = ({ children }) => {
   const prefersReducedMotion = useReducedMotionPreference();
 
   useEffect(() => {
-    // Single global Lenis instance configuration
+    // Single global Lenis instance
     const lenis = new Lenis({
       duration: prefersReducedMotion ? 0 : 1.15,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -33,12 +45,13 @@ export const LenisProvider: React.FC<LenisProviderProps> = ({ children }) => {
       smoothWheel: !prefersReducedMotion,
       wheelMultiplier: 0.95,
       touchMultiplier: 1.5,
-      autoRaf: false
+      autoRaf: false,
+      respectReducedMotion: true
     });
 
     setLenisInstance(lenis);
 
-    // RAF loop
+    // Single unified requestAnimationFrame loop
     const raf = (time: number) => {
       lenis.raf(time);
       rafIdRef.current = requestAnimationFrame(raf);
@@ -65,7 +78,10 @@ export const LenisProvider: React.FC<LenisProviderProps> = ({ children }) => {
     }
   }, [location.pathname, lenisInstance]);
 
-  const scrollTo = (target: number | string | HTMLElement, options?: Parameters<Lenis['scrollTo']>[1]) => {
+  const scrollTo = useCallback((
+    target: number | string | HTMLElement,
+    options?: Parameters<Lenis['scrollTo']>[1]
+  ) => {
     if (lenisInstance) {
       lenisInstance.scrollTo(target, options);
     } else {
@@ -78,7 +94,7 @@ export const LenisProvider: React.FC<LenisProviderProps> = ({ children }) => {
         target.scrollIntoView({ behavior: prefersReducedMotion ? 'instant' : 'smooth' });
       }
     }
-  };
+  }, [lenisInstance, prefersReducedMotion]);
 
   return (
     <LenisContext.Provider value={{ lenis: lenisInstance, scrollTo }}>

@@ -54,9 +54,9 @@ export const IntroMedia: React.FC<IntroMediaProps> = ({
         margin: maxWidth ? '0' : '0 auto',
         borderRadius: 'var(--radius-sm)',
         overflow: 'hidden',
-        border: '1px solid var(--border-medium)',
-        backgroundColor: '#0E100F',
-        boxShadow: '0 24px 60px rgba(18, 20, 19, 0.12)',
+        border: '1px solid var(--border-light)',
+        backgroundColor: 'var(--bg-dark)',
+        boxShadow: '0 20px 48px rgba(18, 19, 18, 0.08)',
         transition: 'border-color var(--transition-normal)',
         ...style
       }}
@@ -177,7 +177,7 @@ export const IntroMedia: React.FC<IntroMediaProps> = ({
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                color: 'rgba(252, 251, 248, 0.75)',
+                color: 'rgba(250, 250, 248, 0.75)',
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.6875rem',
                 letterSpacing: '0.08em',
@@ -241,10 +241,10 @@ export const IntroMedia: React.FC<IntroMediaProps> = ({
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#FCFBF8'
+                    color: 'var(--text-inverse)'
                   }}
                 >
-                  <Play size={10} fill="#FCFBF8" />
+                  <Play size={10} fill="currentColor" />
                 </div>
                 <span
                   style={{
@@ -252,7 +252,7 @@ export const IntroMedia: React.FC<IntroMediaProps> = ({
                     fontSize: '0.75rem',
                     fontWeight: 600,
                     letterSpacing: '0.12em',
-                    color: '#FCFBF8',
+                    color: 'var(--text-inverse)',
                     textTransform: 'uppercase'
                   }}
                 >
@@ -264,7 +264,7 @@ export const IntroMedia: React.FC<IntroMediaProps> = ({
                 style={{
                   fontFamily: 'var(--font-sans)',
                   fontSize: '0.8125rem',
-                  color: 'rgba(252, 251, 248, 0.7)',
+                  color: 'rgba(250, 250, 248, 0.7)',
                   letterSpacing: '0.02em',
                   textAlign: 'center',
                   maxWidth: '320px',
@@ -285,7 +285,7 @@ export const IntroMedia: React.FC<IntroMediaProps> = ({
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                color: 'rgba(252, 251, 248, 0.65)',
+                color: 'rgba(250, 250, 248, 0.65)',
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.6875rem',
                 letterSpacing: '0.05em'

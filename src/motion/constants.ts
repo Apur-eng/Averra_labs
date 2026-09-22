@@ -16,7 +16,7 @@ export const EASE_PHYSICAL = [0.19, 1, 0.22, 1] as const;
  * Transition Durations (in seconds)
  */
 export const DURATION_FAST = 0.2;
-export const DURATION_NORMAL = 0.48;
+export const DURATION_NORMAL = 0.4;
 export const DURATION_SLOW = 0.85;
 
 /**

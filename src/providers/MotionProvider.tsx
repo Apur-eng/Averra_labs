@@ -1,5 +1,6 @@
 import React from 'react';
 import { LenisProvider } from '../motion/lenis/LenisProvider';
+import { ScrollProvider } from '../motion/scroll/ScrollProvider';
 import { CursorProvider } from '../motion/cursor/CursorProvider';
 import { WebGLProvider } from '../webgl/WebGLProvider';
 
@@ -9,18 +10,21 @@ export interface MotionProviderProps {
 
 /**
  * Root MotionProvider composing Averra's foundational motion layers:
- * 1. Lenis Smooth Scrolling
- * 2. High-performance Cursor & Pointer Tracking
- * 3. Shared WebGL Layer Context
+ * 1. Lenis Smooth Scrolling (Single instance, single RAF loop)
+ * 2. Centralized Scroll Coordinator (Zero-render ref state & dual-channel subscribers)
+ * 3. High-performance Cursor & Pointer Tracking (Decoupled from touch devices)
+ * 4. Shared WebGL Layer Context (Progressive enhancement fallback)
  */
 export const MotionProvider: React.FC<MotionProviderProps> = ({ children }) => {
   return (
     <LenisProvider>
-      <CursorProvider>
-        <WebGLProvider>
-          {children}
-        </WebGLProvider>
-      </CursorProvider>
+      <ScrollProvider>
+        <CursorProvider>
+          <WebGLProvider>
+            {children}
+          </WebGLProvider>
+        </CursorProvider>
+      </ScrollProvider>
     </LenisProvider>
   );
 };

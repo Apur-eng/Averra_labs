@@ -25,6 +25,7 @@ export interface NavbarProps {
  */
 export const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const location = useLocation();
   const prefersReducedMotion = useReducedMotionPreference();
   const { isVisible, isScrolled } = useScrollDirection();
@@ -34,8 +35,8 @@ export const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  // Navbar must stay visible if drawer is open or at top / scrolling up
-  const isNavVisible = isVisible || mobileMenuOpen;
+  // Navbar must stay visible if drawer is open, if keyboard focus is inside, or when scrolling up / at top
+  const isNavVisible = isVisible || mobileMenuOpen || isFocused;
 
   return (
     <>
@@ -48,6 +49,12 @@ export const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
         transition={{
           duration: prefersReducedMotion ? 0 : DURATION_NORMAL,
           ease: EASE_OUT
+        }}
+        onFocusCapture={() => setIsFocused(true)}
+        onBlurCapture={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+            setIsFocused(false);
+          }
         }}
       >
         <div className="header-container">

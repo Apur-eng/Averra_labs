@@ -21,6 +21,18 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
     };
   }, [isOpen]);
 
+  // Handle Escape key to dismiss mobile navigation
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
@@ -40,6 +52,9 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
     >
       <div
         className="mobile-nav-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile Navigation Menu"
         style={{
           width: '100%',
           maxWidth: '380px',
