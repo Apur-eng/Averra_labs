@@ -2,6 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 
+const WHATSAPP_URL = 'https://wa.me/919278209518';
+const WHATSAPP_NUMBER = '+91 92782 09518';
+const PHONE_URL = 'tel:+918840065294';
+const PHONE_NUMBER = '+91 88400 65294';
+
 export const Footer: React.FC = () => {
   return (
     <footer
@@ -181,12 +186,23 @@ export const Footer: React.FC = () => {
             <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <li>
                 <a
-                  href="mailto:hello@averralabs.com"
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="body-small"
                   style={{ color: 'var(--text-primary)', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
                 >
-                  hello@averralabs.com
+                  WhatsApp {WHATSAPP_NUMBER}
                   <ArrowUpRight size={14} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href={PHONE_URL}
+                  className="body-small"
+                  style={{ color: 'var(--text-secondary)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
+                >
+                  {PHONE_NUMBER}
                 </a>
               </li>
               <li>
@@ -195,7 +211,7 @@ export const Footer: React.FC = () => {
                   className="body-small"
                   style={{ color: 'var(--text-secondary)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
                 >
-                  WhatsApp Inquiries (Via Contact)
+                  Start a Project
                   <ArrowUpRight size={14} />
                 </Link>
               </li>

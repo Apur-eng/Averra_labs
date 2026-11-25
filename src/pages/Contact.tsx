@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
-import { Mail, MessageSquare, Instagram, ArrowRight, CheckCircle2, X } from 'lucide-react';
+import { MessageSquare, Phone, Instagram, ArrowRight, CheckCircle2, X } from 'lucide-react';
 import { Eyebrow } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { ProjectInquiry } from '../types/inquiry';
 
-// Clear production placeholder for WhatsApp (easily configured by studio)
-const WHATSAPP_CONTACT_URL = 'https://wa.me/?text=Hello%20Averra%2C%20I%20would%20like%20to%20discuss%20a%20project';
+const WHATSAPP_NUMBER = '+91 92782 09518';
+const WHATSAPP_URL = 'https://wa.me/919278209518';
+const PHONE_NUMBER = '+91 88400 65294';
+const PHONE_URL = 'tel:+918840065294';
+
+const TEAM = ['Apurv Singh', 'Abhinav Tiwari', 'Ritesh Singh'];
 
 const PROJECT_TYPES = [
   'Website / Flagship',
+  'Dynamic / 3D Animated',
   'E-commerce Store',
   'Web Application',
   'SaaS Product',
@@ -17,9 +22,9 @@ const PROJECT_TYPES = [
 ];
 
 const BUDGET_RANGES = [
-  '₹7,500 (Growth Tier)',
-  '₹12,000 (Premium Flagship)',
-  '₹15,000+ (3D + SaaS Package)',
+  '₹8,000 — Basic Website',
+  '₹15,000 — Dynamic / 3D',
+  '₹25,000+ — E-commerce',
   'Custom Scope'
 ];
 
@@ -33,11 +38,11 @@ const TIMELINE_OPTIONS = [
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState<ProjectInquiry>({
     name: '',
-    email: '',
+    phone: '',
     company: '',
-    projectType: 'Website / Flagship',
-    budget: '₹12,000 (Premium Flagship)',
-    timeline: '7–14 Days (Fast Track)',
+    projectType: '',
+    budget: '',
+    timeline: '',
     details: ''
   });
 
@@ -45,7 +50,7 @@ export const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Averra v2 Project Inquiry Received:', formData);
+    console.log('Averra Project Brief Received:', formData);
     setIsSubmitted(true);
   };
 
@@ -53,11 +58,11 @@ export const Contact: React.FC = () => {
     setIsSubmitted(false);
     setFormData({
       name: '',
-      email: '',
+      phone: '',
       company: '',
-      projectType: 'Website / Flagship',
-      budget: '₹12,000 (Premium Flagship)',
-      timeline: '7–14 Days (Fast Track)',
+      projectType: '',
+      budget: '',
+      timeline: '',
       details: ''
     });
   };
@@ -88,14 +93,53 @@ export const Contact: React.FC = () => {
                 <Eyebrow>Start a Project</Eyebrow>
                 <h1 className="display-title" style={{ marginBottom: '1.25rem' }}>
                   Have an idea? <br />
-                  <span style={{ color: 'var(--accent-blue)' }}>Let’s build it.</span>
+                  <span style={{ color: 'var(--accent-blue)' }}>Let's build it.</span>
                 </h1>
                 <p className="lead-text">
                   Whether you need a high-performance marketing flagship, a custom web app, or an automated operational pipeline, we are ready to bring your concept into live production.
                 </p>
               </div>
 
-              {/* Direct Channels Cards */}
+              {/* Pricing Reference */}
+              <div
+                style={{
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border-light)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: '1.75rem 2rem',
+                  marginBottom: '1.5rem'
+                }}
+              >
+                <div className="mono-tag" style={{ color: 'var(--accent-blue)', marginBottom: '1rem' }}>
+                  Starting Prices
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+                  {[
+                    { label: 'Basic Website', price: '₹8,000' },
+                    { label: 'Dynamic / 3D Animated', price: '₹15,000' },
+                    { label: 'E-commerce', price: '₹25,000+' }
+                  ].map(({ label, price }, i, arr) => (
+                    <div
+                      key={label}
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        padding: '0.75rem 0',
+                        borderBottom: i < arr.length - 1 ? '1px solid var(--border-subtle)' : 'none'
+                      }}
+                    >
+                      <span className="body-small" style={{ color: 'var(--text-secondary)' }}>{label}</span>
+                      <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)', fontSize: '0.9375rem' }}>{price}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="body-small" style={{ marginTop: '1rem', color: 'var(--text-tertiary)', fontSize: '0.75rem' }}>
+                  Final scope and pricing depend on requirements. Tell us what you're building.
+                </p>
+              </div>
+
+              {/* Direct Channels */}
               <div
                 style={{
                   background: 'var(--bg-card)',
@@ -105,42 +149,11 @@ export const Contact: React.FC = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '1.5rem',
-                  marginBottom: '2rem'
+                  marginBottom: '1.5rem'
                 }}
               >
                 <div className="mono-tag" style={{ color: 'var(--accent-blue)' }}>
-                  Direct Contact Channels
-                </div>
-
-                {/* Email */}
-                <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                  <div
-                    style={{
-                      width: '40px',
-                      height: '40px',
-                      borderRadius: 'var(--radius-sm)',
-                      background: 'var(--bg-secondary)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--text-primary)'
-                    }}
-                  >
-                    <Mail size={18} />
-                  </div>
-                  <div>
-                    <div className="body-small" style={{ fontSize: '0.75rem' }}>Email Us Directly</div>
-                    <a
-                      href="mailto:hello@averralabs.com"
-                      style={{
-                        fontWeight: 600,
-                        color: 'var(--text-primary)',
-                        fontSize: '1rem'
-                      }}
-                    >
-                      hello@averralabs.com
-                    </a>
-                  </div>
+                  Direct Contact
                 </div>
 
                 {/* WhatsApp */}
@@ -154,15 +167,16 @@ export const Contact: React.FC = () => {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: 'var(--text-primary)'
+                      color: 'var(--text-primary)',
+                      flexShrink: 0
                     }}
                   >
                     <MessageSquare size={18} />
                   </div>
                   <div>
-                    <div className="body-small" style={{ fontSize: '0.75rem' }}>WhatsApp Direct</div>
+                    <div className="body-small" style={{ fontSize: '0.75rem', marginBottom: '0.2rem' }}>WhatsApp</div>
                     <a
-                      href={WHATSAPP_CONTACT_URL}
+                      href={WHATSAPP_URL}
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
@@ -174,7 +188,39 @@ export const Contact: React.FC = () => {
                         gap: '0.25rem'
                       }}
                     >
-                      Chat with an Engineer →
+                      {WHATSAPP_NUMBER} →
+                    </a>
+                  </div>
+                </div>
+
+                {/* Phone */}
+                <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+                  <div
+                    style={{
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: 'var(--radius-sm)',
+                      background: 'var(--bg-secondary)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'var(--text-primary)',
+                      flexShrink: 0
+                    }}
+                  >
+                    <Phone size={18} />
+                  </div>
+                  <div>
+                    <div className="body-small" style={{ fontSize: '0.75rem', marginBottom: '0.2rem' }}>Phone</div>
+                    <a
+                      href={PHONE_URL}
+                      style={{
+                        fontWeight: 600,
+                        color: 'var(--text-primary)',
+                        fontSize: '1rem'
+                      }}
+                    >
+                      {PHONE_NUMBER}
                     </a>
                   </div>
                 </div>
@@ -190,13 +236,14 @@ export const Contact: React.FC = () => {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: 'var(--text-primary)'
+                      color: 'var(--text-primary)',
+                      flexShrink: 0
                     }}
                   >
                     <Instagram size={18} />
                   </div>
                   <div>
-                    <div className="body-small" style={{ fontSize: '0.75rem' }}>Instagram</div>
+                    <div className="body-small" style={{ fontSize: '0.75rem', marginBottom: '0.2rem' }}>Instagram</div>
                     <a
                       href="https://instagram.com/averralabs"
                       target="_blank"
@@ -213,26 +260,29 @@ export const Contact: React.FC = () => {
                 </div>
               </div>
 
-              {/* Studio Availability Notice */}
+              {/* Team */}
               <div
                 style={{
-                  padding: '1.5rem',
+                  padding: '1.5rem 2rem',
                   background: 'var(--bg-secondary)',
                   border: '1px solid var(--border-light)',
                   borderRadius: 'var(--radius-md)'
                 }}
               >
-                <div className="mono-tag" style={{ color: 'var(--accent-blue)', marginBottom: '0.375rem' }}>
-                  Availability Notice
+                <div className="mono-tag" style={{ color: 'var(--accent-blue)', marginBottom: '0.875rem' }}>
+                  The Team
                 </div>
-                <p className="body-small">
-                  We accept a limited number of client engagements each month to maintain obsessive attention to quality.
-                  Current estimated start: <strong>Immediate / Within 3 Days</strong>.
-                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
+                  {TEAM.map((name) => (
+                    <div key={name} className="body-small" style={{ color: 'var(--text-primary)', fontWeight: 500 }}>
+                      {name}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Right Column: Project Inquiry Form */}
+            {/* Right Column: Project Brief Form */}
             <div
               style={{
                 background: 'var(--bg-card)',
@@ -243,10 +293,10 @@ export const Contact: React.FC = () => {
               }}
             >
               <h2 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
-                Project Inquiry
+                Project Brief
               </h2>
               <p className="body-small" style={{ marginBottom: '2rem' }}>
-                Fill out the details below. We review every brief carefully and respond with technical recommendations within 24 hours.
+                Fill out the details below. We review every brief and respond within 24 hours.
               </p>
 
               <form onSubmit={handleSubmit}>
@@ -259,26 +309,26 @@ export const Contact: React.FC = () => {
                     id="inq-name"
                     type="text"
                     required
-                    placeholder="e.g. Alex Morgan"
+                    placeholder="Your name"
                     className="form-input"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   />
                 </div>
 
-                {/* Email */}
+                {/* Phone */}
                 <div className="form-group">
-                  <label htmlFor="inq-email" className="form-label">
-                    Work Email *
+                  <label htmlFor="inq-phone" className="form-label">
+                    Phone / WhatsApp *
                   </label>
                   <input
-                    id="inq-email"
-                    type="email"
+                    id="inq-phone"
+                    type="tel"
                     required
-                    placeholder="alex@company.com"
+                    placeholder="+91 XXXXX XXXXX"
                     className="form-input"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   />
                 </div>
 
@@ -290,7 +340,7 @@ export const Contact: React.FC = () => {
                   <input
                     id="inq-company"
                     type="text"
-                    placeholder="e.g. Acme Corp or Startup Name"
+                    placeholder="Company or organization name"
                     className="form-input"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
@@ -313,9 +363,9 @@ export const Contact: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Approximate Budget Range */}
+                {/* Budget Range */}
                 <div className="form-group">
-                  <label className="form-label">Approximate Budget Range</label>
+                  <label className="form-label">Approximate Budget</label>
                   <div className="pill-select-group">
                     {BUDGET_RANGES.map((budget) => (
                       <div
@@ -348,12 +398,12 @@ export const Contact: React.FC = () => {
                 {/* Project Details */}
                 <div className="form-group">
                   <label htmlFor="inq-details" className="form-label">
-                    Project Details & Objectives *
+                    Tell us what you're building *
                   </label>
                   <textarea
                     id="inq-details"
                     required
-                    placeholder="Tell us about the project goals, key requirements, references, or specific problems to solve..."
+                    placeholder="Describe the project — goals, requirements, references, or specific problems to solve..."
                     className="form-textarea"
                     value={formData.details}
                     onChange={(e) => setFormData({ ...formData, details: e.target.value })}
@@ -367,7 +417,7 @@ export const Contact: React.FC = () => {
                   style={{ width: '100%', justifyContent: 'center' }}
                   icon={<ArrowRight size={18} />}
                 >
-                  Submit Inquiry
+                  Send Project Brief
                 </Button>
               </form>
             </div>
@@ -438,11 +488,25 @@ export const Contact: React.FC = () => {
             </div>
 
             <h3 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text-primary)' }}>
-              Inquiry Received
+              Brief Received
             </h3>
 
-            <p className="body-text" style={{ marginBottom: '2rem' }}>
-              Thank you, <strong>{formData.name || 'there'}</strong>. An Averra lead engineer will review your project requirements and get in touch within 24 hours.
+            <p className="body-text" style={{ marginBottom: '1.25rem' }}>
+              Thank you, <strong>{formData.name || 'there'}</strong>. We will review your project and get back to you within 24 hours.
+            </p>
+
+            <p className="body-small" style={{ marginBottom: '2rem', color: 'var(--text-secondary)' }}>
+              In the meantime, reach us on{' '}
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'var(--accent-blue)', fontWeight: 600 }}
+              >
+                WhatsApp
+              </a>
+              {' '}or call{' '}
+              <a href={PHONE_URL} style={{ color: 'var(--accent-blue)', fontWeight: 600 }}>{PHONE_NUMBER}</a>.
             </p>
 
             <Button
@@ -459,3 +523,4 @@ export const Contact: React.FC = () => {
     </div>
   );
 };
+

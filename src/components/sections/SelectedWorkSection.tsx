@@ -8,11 +8,12 @@ import { Reveal } from '../motion/Reveal';
 export const SelectedWorkSection: React.FC = () => {
   // Prioritize the requested projects: Mokshita, Fundamics, Solasta, Feel Fresh, Pathik
   const selectedSlugs = [
+    'finservkart-enterprise-portal',
+    'fundamics-lms',
     'mokshita-enterprises',
     'fundamics-tutorials',
     'solasta-life-sciences',
-    'feel-fresh-cafe',
-    'pathik-organic-farming'
+    'feel-fresh-cafe'
   ];
 
   const showcaseProjects = selectedSlugs

@@ -34,11 +34,17 @@ This directory contains the verified research documents, architectural audits, a
 4. **Feel Fresh Cafe** (`D:\Antigravity\antigravity\feel fresh`):
    - *Deep Dive*: [projects/06-feel-fresh.md](file:///d:/averra/case-study-research/projects/06-feel-fresh.md)
    - *Type*: Landmark Lucknow Cafe Digital Flagship, Interactive 40+ Drink Menu, Live Google Reviews & Local SEO.
+5. **Finservkart Financial Platform** (`finserkart_frontend` / `https://finserkart-frontend.vercel.app/`):
+   - *Deep Dive*: [projects/07-finservkart.md](file:///d:/averra/case-study-research/projects/07-finservkart.md)
+   - *Type*: 68-page, 7-portal Enterprise Financial Platform built with React 19, TypeScript, Vite 8, Meta Astryx Design System, StyleX, React Router 7, TanStack Query, and Vitest.
+6. **Fundamics LMS** (`fundamics_LMS_FRONTEND` / `https://github.com/Apur-eng/fundamics_LMS_FRONTEND.git`):
+   - *Deep Dive*: [projects/08-fundamics-lms.md](file:///d:/averra/case-study-research/projects/08-fundamics-lms.md)
+   - *Type*: Cross-platform React Native + Expo 52 Learning Management System (iOS, Android & Web) with Student/Teacher/Admin dashboards, attendance, results, and study materials.
 
 ### Personal & Demo Projects
-5. **Pathik Organic Farming** (`D:\Antigravity\antigravity\pathik`):
+6. **Pathik Organic Farming** (`D:\Antigravity\antigravity\pathik`):
    - *Deep Dive*: [projects/04-pathik.md](file:///d:/averra/case-study-research/projects/04-pathik.md)
    - *Type*: Organic Farming Narrative, 600vh GSAP Canvas Frame Scrubbing, Bilingual English/Hindi Toggle, Masterclass Cohort Funnel.
-6. **Sterling & Associates Law** (`D:\Antigravity\antigravity\Sterling-And-Associates-Law`):
+7. **Sterling & Associates Law** (`D:\Antigravity\antigravity\Sterling-And-Associates-Law`):
    - *Deep Dive*: [projects/05-sterling-law.md](file:///d:/averra/case-study-research/projects/05-sterling-law.md)
    - *Type*: Modern Corporate Legal Application, Cloudflare Workers Edge Computing, Hono API, React 19 + TailwindCSS + Radix UI.

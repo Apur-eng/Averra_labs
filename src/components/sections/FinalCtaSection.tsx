@@ -1,7 +1,12 @@
 import React from 'react';
-import { ArrowRight, Mail } from 'lucide-react';
+import { ArrowRight, MessageSquare, Phone } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Reveal } from '../motion/Reveal';
+
+const WHATSAPP_URL = 'https://wa.me/919278209518';
+const WHATSAPP_NUMBER = '+91 92782 09518';
+const PHONE_URL = 'tel:+918840065294';
+const PHONE_NUMBER = '+91 88400 65294';
 
 export const FinalCtaSection: React.FC = () => {
   return (
@@ -86,7 +91,7 @@ export const FinalCtaSection: React.FC = () => {
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '1.25rem',
+                gap: '0.875rem',
                 alignItems: 'flex-start'
               }}
             >
@@ -99,30 +104,39 @@ export const FinalCtaSection: React.FC = () => {
                 Start a Project
               </Button>
 
-              <div
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
-                  display: 'flex',
+                  display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '0.75rem',
+                  gap: '0.5rem',
                   fontFamily: 'var(--font-mono)',
                   fontSize: 'var(--text-xs)',
-                  color: 'var(--text-tertiary)'
+                  color: 'var(--text-secondary)',
+                  textDecoration: 'none'
                 }}
               >
-                <Mail size={14} style={{ color: 'var(--accent-blue)' }} />
-                <span>Or email us directly:</span>
-                <a
-                  href="mailto:hello@averralabs.com"
-                  style={{
-                    color: 'var(--text-primary)',
-                    fontWeight: 600,
-                    textDecoration: 'none',
-                    borderBottom: '1px solid var(--border-medium)'
-                  }}
-                >
-                  hello@averralabs.com
-                </a>
-              </div>
+                <MessageSquare size={13} style={{ color: 'var(--accent-blue)' }} />
+                <span>WhatsApp — {WHATSAPP_NUMBER}</span>
+              </a>
+
+              <a
+                href={PHONE_URL}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 'var(--text-xs)',
+                  color: 'var(--text-secondary)',
+                  textDecoration: 'none'
+                }}
+              >
+                <Phone size={13} style={{ color: 'var(--accent-blue)' }} />
+                <span>Phone — {PHONE_NUMBER}</span>
+              </a>
 
               <span
                 style={{

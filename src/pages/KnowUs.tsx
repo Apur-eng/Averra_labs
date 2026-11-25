@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import { TEAM_MEMBERS } from '../data/team';
 import { PROCESS_STEPS, PHILOSOPHY_VALUES } from '../data/process';
 import { Button } from '../components/ui/Button';
-import { Eyebrow, PillTag } from '../components/ui/Badge';
+import { Eyebrow } from '../components/ui/Badge';
 import { RoadmapSection } from '../components/sections/RoadmapSection';
 
 export const KnowUs: React.FC = () => {
@@ -122,66 +122,44 @@ export const KnowUs: React.FC = () => {
 
           <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '2rem'
+              display: 'flex',
+              flexDirection: 'column',
+              borderTop: '1px solid var(--border-light)'
             }}
           >
             {TEAM_MEMBERS.map((member) => (
               <div
                 key={member.name}
                 style={{
-                  background: 'var(--bg-card)',
-                  border: '1px solid var(--border-light)',
-                  borderRadius: 'var(--radius-md)',
-                  padding: '2rem',
                   display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between'
+                  alignItems: 'center',
+                  gap: '1.5rem',
+                  padding: '1.25rem 0',
+                  borderBottom: '1px solid var(--border-light)'
                 }}
               >
-                <div>
-                  <div
-                    style={{
-                      width: '56px',
-                      height: '56px',
-                      borderRadius: 'var(--radius-sm)',
-                      background: 'var(--bg-secondary)',
-                      border: '1px solid var(--border-light)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontWeight: 700,
-                      fontSize: '1.25rem',
-                      color: 'var(--text-primary)',
-                      fontFamily: 'var(--font-mono)',
-                      marginBottom: '1.25rem'
-                    }}
-                  >
-                    {member.initial}
-                  </div>
-
-                  <h3 style={{ fontSize: '1.375rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
-                    {member.name}
-                  </h3>
-                  <div className="mono-tag" style={{ color: 'var(--accent-blue)', marginBottom: '1rem' }}>
-                    {member.role}
-                  </div>
-                  <p className="body-small" style={{ marginBottom: '1.5rem', lineHeight: 1.6 }}>
-                    {member.bio}
-                  </p>
+                <div
+                  style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: 'var(--radius-sm)',
+                    background: 'var(--bg-secondary)',
+                    border: '1px solid var(--border-light)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: 700,
+                    fontSize: '0.875rem',
+                    color: 'var(--text-primary)',
+                    fontFamily: 'var(--font-mono)',
+                    flexShrink: 0
+                  }}
+                >
+                  {member.initial}
                 </div>
-
-                <div>
-                  <div className="mono-tag" style={{ fontSize: '0.6875rem', marginBottom: '0.5rem' }}>
-                    Focus Areas
-                  </div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem' }}>
-                    {member.expertise.map((exp) => (
-                      <PillTag key={exp}>{exp}</PillTag>
-                    ))}
-                  </div>
-                </div>
+                <span style={{ fontSize: '1.125rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                  {member.name}
+                </span>
               </div>
             ))}
           </div>

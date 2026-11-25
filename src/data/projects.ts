@@ -373,6 +373,203 @@ export const PROJECTS: Project[] = [
       title: 'Feel Fresh Cafe Lucknow'
     },
     featured: true
+  },
+  {
+    slug: 'finservkart-financial-services',
+    title: 'Finservkart — Financial Services Marketplace & Public Consumer Storefront',
+    client: 'Finservkart',
+    industry: 'Fintech & Corporate Regulatory Services',
+    year: '2025',
+    category: 'Websites',
+    categoryTag: 'Financial Services Marketplace',
+    shortDesc: 'High-converting consumer and corporate financial services marketplace offering dynamic catalog discovery, instant KYC document intake, and SabPaisa payment checkout.',
+    description: 'Averra architected and refined the public financial services flagship for Finservkart, providing individuals, MSMEs, and startups instant access to 12+ regulatory, taxation, and corporate licensing services with transparent pricing, instant document collection, and zero-latency service search.',
+    challenge: 'Consumers and business founders struggled with fragmented regulatory filing processes across disjointed platforms, requiring a unified, authoritative digital storefront with instant search, automated document prerequisites, and frictionless payment checkout.',
+    approach: 'Engineered a responsive, high-converting digital marketplace pairing semantic HTML5, Bootstrap 5, and customized modern styling with instant client-side service filtering, multi-file KYC upload pipelines, and seamless SabPaisa payment processing.',
+    design: 'Trust-centric royal financial blue (#0066CC, #0052A3) and crisp white surfaces with gold accent highlights. Poppins display typography paired with legible Inter body scales and subtle floating micro-animations.',
+    development: 'Modular PHP component architecture, responsive CSS variables, client-side live search filtering, SabPaisa gateway integration with cryptographic status validation, and automated PDF invoice generation.',
+    services: [
+      'Marketplace Architecture',
+      'Financial Service Catalog',
+      'Instant Search & Discovery',
+      'KYC & Document Upload Engine',
+      'SabPaisa Payment Gateway',
+      'Automated PDF Invoicing'
+    ],
+    technology: [
+      'PHP',
+      'Bootstrap 5',
+      'jQuery 3.6.0',
+      'Vanilla CSS',
+      'SabPaisa Gateway',
+      'PDFMake',
+      'MySQL'
+    ],
+    liveUrl: 'https://finservkart.com',
+    heroImage: '/images/projects/finservkart/hero_carousel.jpg',
+    thumbnail: '/images/projects/finservkart/financial_advisory.jpg',
+    visualShowcase: [
+      {
+        title: '12+ Dynamic Financial Verticals',
+        desc: 'Dynamic catalog covering GST, ITR, Company Incorporations, Audits, CIBIL repair, and Bank Project Reports with instant requirements checklist.',
+        badge: 'Service Catalog',
+        image: '/images/projects/finservkart/service_gst.jpg'
+      },
+      {
+        title: 'Corporate Setup & Statutory Licensing',
+        desc: 'End-to-end entity registration workflows for Private Limited companies, LLPs, OPCs, and Trusts with transparent documentation requisites.',
+        badge: 'Company Formation',
+        image: '/images/projects/finservkart/service_pvtltd.png'
+      },
+      {
+        title: 'Credit Engineering & Bank Project Reports',
+        desc: 'CIBIL score analysis and CMA data project preparation for commercial bank loans with secure KYC document upload.',
+        badge: 'Credit & Loan CMA',
+        image: '/images/projects/finservkart/service_cibil.png'
+      }
+    ],
+    metrics: [
+      { value: '10,000+', label: 'Active Retail & MSME Clients' },
+      { value: '12+', label: 'Regulatory & Tax Verticals' },
+      { value: '100%', label: 'Digital KYC Submission' }
+    ],
+    testimonial: {
+      quote: 'Finservkart has simplified complex regulatory compliances and tax filings for thousands of business owners. The storefront makes finding and purchasing verified CA services effortless.',
+      author: 'Executive Team',
+      title: 'Finservkart Financial Services'
+    },
+    featured: true
+  },
+  {
+    slug: 'finservkart-enterprise-portal',
+    title: 'Finservkart Enterprise — 7-Portal Financial Operations Platform & Design System',
+    client: 'Finservkart',
+    industry: 'Fintech & Enterprise Workflow Automation',
+    year: '2026',
+    category: 'Applications',
+    categoryTag: 'React 19 Multi-Portal Financial Platform',
+    shortDesc: '68-page enterprise financial services platform spanning 7 role-based portals (Public, Customer, Agent, CA, Franchise, Coordinator, and Admin) built on React 19, Meta Astryx, and TanStack Query.',
+    description: 'Averra architected and engineered the modern React 19 frontend for the Finservkart Enterprise Platform. Spanning 68 pages across 7 dedicated role-based portals, it unifies public service discovery, customer KYC onboarding, load-balanced CA filing workflows, franchise territory oversight, multi-tier commission ledgers, and an interactive Demo Role Switcher.',
+    challenge: 'Finservkart needed to unify 7 distinct stakeholder workflows—Public visitors, Customers, Field Agents, Chartered Accountants, Franchise owners, Operations Coordinators, and Central Admins—into one cohesive, type-safe, high-density web application with consistent design standards.',
+    approach: 'Engineered a modular React 19 + TypeScript architecture powered by Meta\'s Astryx Design System and StyleX tokens, React Router v7 nested role layouts, TanStack React Query for server state, React Hook Form + Zod validation, and 87 automated Vitest test cases across 10 suites.',
+    design: 'Restrained institutional palette (#0F172A obsidian navy, #0066CC primary action blue, #F8FAFC canvas, #FFFFFF surfaces) with Manrope headings and Inter body typography via Fontsource.',
+    development: 'React 19.3, TypeScript, Vite 8, Meta Astryx (@astryxdesign/core v0.7.16), StyleX, React Router 7, TanStack React Query 5, React Hook Form + Zod 4, Oxlint, and Vitest.',
+    services: [
+      '7-Portal Role Architecture',
+      'Design System Engineering',
+      'Public Marketplace & Onboarding',
+      'CA Workflow & Document Desk',
+      'Multi-Tier Commission Ledger',
+      'Automated Vitest Test Suite'
+    ],
+    technology: [
+      'React 19',
+      'TypeScript',
+      'Vite 8',
+      'Astryx / StyleX',
+      'React Router 7',
+      'TanStack Query',
+      'Zod',
+      'Vitest'
+    ],
+    liveUrl: 'https://finserkart-frontend.vercel.app/',
+    heroImage: '/images/projects/finservkart/portal_hero.jpg',
+    thumbnail: '/images/projects/finservkart/portal_auth.png',
+    visualShowcase: [
+      {
+        title: '7-Portal Role-Based Architecture',
+        desc: 'Dedicated layouts and routes for Public (10 pages), Customer (12), Agent (9), CA (10), Franchise (8), Coordinator (8), and Central Admin (11) with an interactive Demo Role Switcher.',
+        badge: '7-Portal System',
+        image: '/images/projects/finservkart/portal_auth.png'
+      },
+      {
+        title: 'CA Assignment & Filing Workflow Desk',
+        desc: 'Load-balanced coordinator assignment desk routing customer filings to accredited Chartered Accountants with milestone tracking and document verification.',
+        badge: 'Workflow Engine',
+        image: '/images/projects/finservkart/screenshot_workflow.jpg'
+      },
+      {
+        title: 'Statutory Audit & Commission Treasury',
+        desc: 'Dedicated CA deliverable handover workspace alongside franchise override statements, agent payout ledgers, and immutable admin audit logs.',
+        badge: 'Treasury & Audit',
+        image: '/images/projects/finservkart/service_audit.jpg'
+      }
+    ],
+    metrics: [
+      { value: '68 Pages', label: 'Across 7 Role Portals' },
+      { value: '87 Tests', label: '10 Automated Vitest Suites' },
+      { value: 'React 19', label: 'Astryx + StyleX Stack' }
+    ],
+    testimonial: {
+      quote: 'Unifying all seven portals onto a single React 19 and Astryx design system transformed how our customers, agents, CAs, and coordinators collaborate every day.',
+      author: 'Operations & Technology Head',
+      title: 'Finservkart Enterprise'
+    },
+    featured: true
+  },
+  {
+    slug: 'fundamics-lms',
+    title: 'Fundamics LMS — Cross-Platform Learning Management System (iOS, Android & Web)',
+    client: 'Fundemics Tutorials LLP',
+    industry: 'EdTech & Academic Learning Management',
+    year: '2026',
+    category: 'Applications',
+    categoryTag: 'React Native & Expo Cross-Platform LMS',
+    shortDesc: 'Cross-platform mobile and web LMS engineered with React Native, Expo 52, and TypeScript—delivering multi-role Student, Teacher, and Admin dashboards, attendance tracking, exam results, and study materials.',
+    description: 'Averra designed and built the Fundamics LMS cross-platform application using React Native and Expo 52, giving students, teachers, and administrators a unified mobile and web workspace for daily class schedules, attendance calendars, test results with PDF report sheets, study material access, and fee/notification management.',
+    challenge: 'Students and faculty at Fundamics Tutorials needed an instant, mobile-first portal to track daily attendance, inspect detailed exam results, download study resources, and receive institutional notices across Android, iOS, and web browsers without maintaining separate codebases.',
+    approach: 'Architected a modular feature-sliced React Native + Expo 52 TypeScript codebase with React Navigation 7 (native stack + bottom tabs), Expo Secure Store for token persistence, and an Academic Blue design system shared across mobile and react-native-web.',
+    design: 'Academic Blue institutional palette (#075B86 deep academic blue, #087BAF vivid CTA blue, #F5F9FC pale canvas, #15966A attendance present green, #C69A45 academic gold) with light/dark theme support.',
+    development: 'React Native 0.76.9, Expo ~52.0.37, React 18.3, TypeScript, React Navigation 7, Expo Secure Store, Expo Linear Gradient, and automated Node test contracts.',
+    services: [
+      'Cross-Platform Mobile & Web App',
+      'Multi-Role LMS Dashboards',
+      'Attendance & Calendar System',
+      'Results & PDF Sheet Viewer',
+      'Study Material Repository',
+      'Secure Auth & Recovery Flow'
+    ],
+    technology: [
+      'React Native',
+      'Expo 52',
+      'TypeScript',
+      'React Navigation 7',
+      'Expo Secure Store',
+      'React Native Web'
+    ],
+    heroImage: '/images/projects/fundamics/hero_classroom.jpg',
+    thumbnail: '/images/projects/fundamics/edge_mobile.png',
+    visualShowcase: [
+      {
+        title: 'Multi-Role Student, Teacher & Admin Dashboards',
+        desc: 'Role-aware home screens surfacing today\'s class timeline, attendance summaries, quick academic metrics, and recent notices.',
+        badge: 'Multi-Role LMS',
+        image: '/images/projects/fundamics/edge_mobile.png'
+      },
+      {
+        title: 'Exam Results & PDF Document Sheets',
+        desc: 'Interactive test result detail sheets, academic examination records, and downloadable PDF scorecards.',
+        badge: 'Results & Analytics',
+        image: '/images/projects/fundamics/result.png'
+      },
+      {
+        title: 'Attendance Calendar & Study Resources',
+        desc: 'Visual attendance calendar preview alongside organized study material, assignments, exams, and fee status modules.',
+        badge: 'Student Workspace',
+        image: '/images/projects/fundamics/rankers_header.png'
+      }
+    ],
+    metrics: [
+      { value: '3 Platforms', label: 'iOS, Android & Web' },
+      { value: '3 Roles', label: 'Student, Teacher & Admin' },
+      { value: '12+ Modules', label: 'Attendance, Results & Fees' }
+    ],
+    testimonial: {
+      quote: 'Having attendance, test results, and study materials in one fast mobile app has made daily coordination effortless for our students, parents, and faculty.',
+      author: 'Academic Leadership',
+      title: 'Fundamics Tutorials'
+    },
+    featured: true
   }
 ];
 

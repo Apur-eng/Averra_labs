@@ -15,7 +15,10 @@ export interface SiteConfig {
   edition: string;
   coordinates: string;
   availability: string;
-  email: string;
+  whatsapp: string;
+  whatsappUrl: string;
+  phone: string;
+  phoneUrl: string;
   navItems: NavItem[];
   disciplines: string[];
 }
@@ -27,7 +30,10 @@ export const SITE_CONFIG: SiteConfig = {
   edition: '2026',
   coordinates: "28°36'N 77°12'E",
   availability: 'Q3/Q4',
-  email: 'hello@averralabs.com',
+  whatsapp: '+91 92782 09518',
+  whatsappUrl: 'https://wa.me/919278209518',
+  phone: '+91 88400 65294',
+  phoneUrl: 'tel:+918840065294',
   navItems: [
     { label: 'Work', href: '/work' },
     { label: 'Know Us', href: '/know-us' },

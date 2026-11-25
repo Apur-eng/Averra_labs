@@ -195,7 +195,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
           </nav>
         </div>
 
-        {/* Bottom CTA & direct email */}
+        {/* Bottom CTA & direct contact */}
         <div style={{ paddingTop: '1.5rem', borderTop: '1px solid var(--border-light)' }}>
           <Button
             to="/contact"
@@ -208,17 +208,22 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
           >
             Start a Project
           </Button>
-          <div
+          <a
+            href="https://wa.me/919278209518"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: 'var(--text-xs)',
               textAlign: 'center',
               color: 'var(--text-tertiary)',
-              marginTop: '1.25rem'
+              marginTop: '1.25rem',
+              display: 'block',
+              textDecoration: 'none'
             }}
           >
-            hello@averralabs.com
-          </div>
+            WhatsApp +91 92782 09518
+          </a>
         </div>
       </div>
     </div>
