@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    AVERRA v2 — Layouts, Typography & Component Utilities
    ========================================================================== */
 
@@ -495,7 +495,14 @@
   will-change: transform;
   background-color: var(--bg-primary);
   border-bottom: 1px solid transparent;
-  transition: border-color var(--transition-normal);
+  transition: border-color var(--transition-normal), opacity 0.32s var(--ease-out), visibility 0s;
+}
+
+html.cinematic-takeover-active .global-header {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.32s var(--ease-out), visibility 0s linear 0.32s;
 }
 
 .global-header.scrolled {
@@ -760,14 +767,14 @@
 }
 
 /* ==========================================================================
-   Hero Section — Viewport-Scale Asymmetrical Editorial Composition
+   Hero Section — Compact Asymmetric Editorial Composition (3 Variations)
    ========================================================================== */
 .hero-editorial-section {
   width: 100%;
   position: relative;
   background-color: var(--bg-primary);
   border-bottom: 1px solid var(--border-light);
-  padding: clamp(2rem, 3.5vw, 3.25rem) clamp(1.25rem, 4vw, 4.5rem) clamp(3.5rem, 6vw, 6rem);
+  padding: clamp(1.25rem, 2.2vw, 2rem) clamp(1.25rem, 4vw, 4.5rem) clamp(2.5rem, 5vw, 4.5rem);
   overflow: hidden;
 }
 
@@ -775,11 +782,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-bottom: 0.875rem;
   border-bottom: 1px solid var(--border-light);
-  margin-bottom: clamp(2rem, 4.5vw, 3.75rem);
+  margin-bottom: clamp(1.5rem, 2.8vw, 2.25rem);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.08em;
   color: var(--text-tertiary);
   text-transform: uppercase;
@@ -788,7 +797,7 @@
 .hero-meta-item {
   display: inline-flex;
   align-items: center;
-  gap: 0.625rem;
+  gap: 0.5rem;
 }
 
 .hero-meta-dot {
@@ -796,110 +805,116 @@
   height: 5px;
   border-radius: 50%;
   background-color: var(--accent-blue);
+  flex-shrink: 0;
 }
 
 .hero-meta-divider {
   color: var(--border-medium);
 }
 
-.hero-headline-wrap {
-  margin-bottom: clamp(2rem, 3.5vw, 3.25rem);
-  width: 100%;
+/* Prototype Variation Switcher */
+.hero-variant-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
 }
 
-.hero-giant-title {
-  font-family: var(--font-display);
-  font-size: var(--text-hero-giant);
-  font-weight: 750;
-  line-height: 0.90;
-  letter-spacing: -0.035em;
-  color: var(--text-primary);
+.hero-variant-prefix {
+  color: var(--text-muted);
+  margin-right: 0.25rem;
+}
+
+.hero-variant-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-light);
+  background-color: var(--bg-card);
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  margin: 0;
-  width: 100%;
+  cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
-.hero-headline-line {
+.hero-variant-btn:hover {
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+}
+
+.hero-variant-btn.active {
+  background-color: var(--text-primary);
+  border-color: var(--text-primary);
+  color: var(--text-inverse);
+}
+
+.hero-variant-code {
+  font-weight: 700;
+}
+
+/* Shared Hero Typography Primitives */
+.hero-composition {
+  width: 100%;
+  margin-bottom: clamp(1.5rem, 2.8vw, 2.5rem);
+  will-change: transform, opacity;
+}
+
+.hero-kicker-mask,
+.hero-line-mask {
   display: block;
   overflow: hidden;
 }
 
-.hero-headline-line.hero-line-1 {
-  text-align: left;
+.hero-line-inner {
+  display: inline-block;
 }
 
-.hero-headline-line.hero-line-2 {
-  text-align: left;
+.hero-lead-kicker {
+  font-family: var(--font-mono);
+  font-size: clamp(0.8125rem, 1vw, 0.9375rem);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  margin: 0;
 }
 
-.hero-headline-line.hero-line-3 {
-  text-align: left;
-  padding-left: clamp(2rem, 14vw, 24vw);
+.hero-lead-kicker--lg {
+  font-size: clamp(0.9375rem, 1.25vw, 1.125rem);
+  margin-bottom: 0.875rem;
 }
 
 .hero-accent-dot {
   color: var(--accent-blue);
 }
 
-/* Hero Supporting Row: Editorial Statement + Actions */
-.hero-supporting-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(1.75rem, 3vw, 3rem);
-  align-items: start;
-  margin-bottom: clamp(2.5rem, 4.5vw, 4rem);
-}
-
-@media (min-width: 1024px) {
-  .hero-supporting-row {
-    grid-template-columns: 7fr 5fr;
-    gap: clamp(2.5rem, 4vw, 5rem);
-  }
-}
-
-.hero-editorial-col {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1rem, 1.8vw, 1.5rem);
-  max-width: 640px;
-}
-
-.hero-editorial-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.625rem;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.hero-accent-text {
   color: var(--accent-blue);
 }
 
-.hero-editorial-lead {
-  font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
-  line-height: 1.62;
+.hero-tagline {
+  font-family: var(--font-sans);
+  font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
+  line-height: 1.5;
   color: var(--text-secondary);
   margin: 0;
   letter-spacing: -0.01em;
 }
 
-.hero-editorial-lead strong {
+.hero-tagline strong {
   color: var(--text-primary);
   font-weight: 600;
-}
-
-.hero-actions-col {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1.25rem, 2vw, 2rem);
 }
 
 .hero-actions {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .hero-work-link {
@@ -907,12 +922,12 @@
   align-items: center;
   gap: 0.5rem;
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-primary);
-  padding-bottom: 2px;
+  padding-bottom: 3px;
   border-bottom: 1px solid var(--text-primary);
   transition: all var(--transition-fast);
 }
@@ -923,367 +938,583 @@
   gap: 0.75rem;
 }
 
-.hero-discipline-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--border-light);
-}
-
-.hero-tag-item {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-tertiary);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-/* Wide Commanding Intro Media Container */
-.hero-media-wrap {
-  width: 100%;
-  position: relative;
-}
-
-.hero-bottom-strip {
-  margin-top: clamp(2.5rem, 4.5vw, 4rem);
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--border-light);
+/* ── Variation 01: Asymmetric Cascade (14islands-inspired) ─────────────────── */
+.hero-asymmetric-top {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  align-items: flex-start;
+  gap: 1.25rem 2.5rem;
+  margin-bottom: clamp(1rem, 2vw, 1.75rem);
 }
 
-@media (max-width: 1024px) {
-  .hero-giant-title {
-    font-size: var(--text-hero-giant-tablet);
-    line-height: 0.92;
-  }
-  .hero-headline-line.hero-line-3 {
-    padding-left: clamp(1.5rem, 10vw, 16vw);
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-giant-title {
-    font-size: var(--text-hero-giant-mobile);
-    line-height: 0.94;
-    letter-spacing: -0.03em;
-  }
-  .hero-headline-line.hero-line-3 {
-    padding-left: 0;
-  }
-  .hero-meta-item.desktop-only {
-    display: none !important;
-  }
-}
-
-
-/* ==========================================================================
-   Statement Section — Narrative Manifesto + Frame-Entry Transition
-   Position in sequence: HERO → STATEMENT → [future CINEMATIC MEDIA] → WORK
-
-   Design intent:
-     - Editorial confidence: large asymmetric type, physical scroll drift.
-     - No border-bottom: section opens downward, not closes.
-     - Bottom frame-entry zone: corner marks signal the incoming media frame.
-     - Background stays #FAFAF8 throughout — max contrast when dark frame arrives.
-   ========================================================================== */
-
-.statement-section {
-  width: 100%;
-  position: relative;
-  background-color: var(--bg-primary);
-
-  /* Top: normal section spacing */
-  padding-top: clamp(4rem, 8vw, 7rem);
-
-  /* Horizontal: matches hero / container gutters */
-  padding-left: clamp(1.25rem, 4vw, 4.5rem);
-  padding-right: clamp(1.25rem, 4vw, 4.5rem);
-
-  /*
-    Bottom: intentionally generous — the visual space before the
-    cinematic media frame. Do NOT reduce. This breath IS the transition.
-  */
-  padding-bottom: clamp(5rem, 10vw, 9rem);
-
-  /* No border-bottom — section breathes open, not closed */
-  overflow: hidden;
-}
-
-/* ── Top Hairline + Label ─────────────────────────────────────────────────── */
-.statement-top-rule {
+.hero-aside-meta {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
-  padding-bottom: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.875rem;
+  max-width: 460px;
+}
+
+@media (min-width: 1024px) {
+  .hero-aside-meta {
+    align-items: flex-end;
+    text-align: right;
+  }
+}
+
+.hero-display-stack {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 4.75vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.hero-asym-line-1 {
+  padding-left: 0;
+}
+
+.hero-asym-line-2 {
+  padding-left: clamp(2.5rem, 12vw, 12rem);
+}
+
+.hero-asym-line-3 {
+  padding-left: clamp(1rem, 4.5vw, 4.5rem);
+}
+
+/* ── Variation 02: Swiss Split Index ──────────────────────────────────────── */
+.hero-layout-swiss {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  align-items: end;
+}
+
+@media (min-width: 1024px) {
+  .hero-layout-swiss {
+    grid-template-columns: 5fr 7fr;
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+}
+
+.hero-swiss-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.hero-tagline--swiss {
+  font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
+  line-height: 1.5;
+}
+
+.hero-swiss-right {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 3.6vw, 3.35rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  margin: 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.hero-swiss-row {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(0.875rem, 1.75vw, 1.5rem);
+  padding: clamp(0.65rem, 1.15vw, 0.95rem) 0;
   border-bottom: 1px solid var(--border-light);
 }
 
-.statement-rule-label {
+.hero-swiss-idx {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-/* ── Eyebrow ──────────────────────────────────────────────────────────────── */
-.statement-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.625rem;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-  margin-bottom: clamp(2rem, 4vw, 3.5rem);
-}
-
-.statement-eyebrow-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background-color: var(--accent-blue);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--accent-blue);
   flex-shrink: 0;
 }
 
-.statement-eyebrow-divider {
-  color: var(--border-medium);
+/* ── Variation 03: Stepped Editorial Staircase ────────────────────────────── */
+.hero-staircase-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem 2rem;
+  padding-bottom: 0.875rem;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  border-bottom: 1px dashed var(--border-medium);
 }
 
-/* ── Statement Body Typography ────────────────────────────────────────────── */
-.statement-body {
-  margin-bottom: clamp(3rem, 6vw, 5.5rem);
-  /* overflow: visible — the scroll drift needs to be clipped by .statement-section */
-}
-
-.statement-line-wrap {
-  will-change: transform;
-  /* Each line is its own motion layer for the scroll drift */
-}
-
-.statement-line {
+.hero-staircase-stack {
   font-family: var(--font-display);
-  font-weight: 720;
-  line-height: 0.92;
+  font-weight: 700;
+  font-size: clamp(2.15rem, 4.35vw, 4.1rem);
+  line-height: 1.04;
   letter-spacing: -0.04em;
   color: var(--text-primary);
-  text-transform: uppercase;
-  margin: 0;
-  padding-bottom: clamp(0.25rem, 0.8vw, 0.5rem);
+  margin: 0 0 clamp(1.25rem, 2.2vw, 1.75rem) 0;
 }
 
-/* Scale: large enough to feel like a declaration, not a heading */
-.statement-line--left {
-  font-size: clamp(2.75rem, 7.5vw, 7.25rem);
+.hero-stair-1 {
+  padding-left: 0;
+}
+
+.hero-stair-2 {
+  padding-left: clamp(3rem, 16vw, 16rem);
+}
+
+.hero-stair-3 {
+  padding-left: clamp(1.5rem, 7vw, 7rem);
   text-align: left;
 }
 
-.statement-line--right {
-  font-size: clamp(2.75rem, 7.5vw, 7.25rem);
-  text-align: left;
-  padding-left: clamp(2rem, 12vw, 18vw); /* Asymmetric indent */
-}
-
-.statement-line--resolve {
-  font-size: clamp(1.875rem, 4.5vw, 4.25rem); /* Smaller — completes the thought quietly */
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  color: var(--text-secondary);
-  text-align: left;
-  padding-left: clamp(0.5rem, 2vw, 2rem);
-  margin-top: clamp(0.5rem, 1.5vw, 1rem);
-}
-
-.statement-accent {
-  color: var(--accent-blue);
-}
-
-.statement-period {
-  color: var(--accent-blue);
-}
-
-/* ── Supporting Editorial Column ──────────────────────────────────────────── */
-.statement-supporting {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  max-width: 920px;
-  margin-bottom: 0;
-}
-
-@media (min-width: 860px) {
-  .statement-supporting {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-    gap: clamp(3rem, 5vw, 6rem);
+@media (min-width: 1180px) {
+  .hero-stair-3 {
+    padding-left: 0;
+    text-align: right;
   }
 }
 
-.statement-supporting-inner {
-  display: flex;
-  gap: 1.25rem;
-  align-items: flex-start;
-}
-
-.statement-supporting-marker {
-  flex-shrink: 0;
-  font-family: var(--font-mono);
-  font-size: 1.25rem;
-  color: var(--accent-blue);
-  line-height: 1.4;
-  margin-top: 0.125rem;
-}
-
-.statement-supporting-text {
-  font-size: clamp(1rem, 1.25vw, 1.1875rem);
-  line-height: 1.65;
-  color: var(--text-secondary);
-  margin: 0;
-  letter-spacing: -0.01em;
-}
-
-.statement-supporting-tags {
+.hero-staircase-footer {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.625rem;
-  padding-top: 0.25rem;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-light);
 }
 
-@media (min-width: 860px) {
-  .statement-supporting-tags {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-    padding-top: 0;
-    border-left: 1px solid var(--border-light);
-    padding-left: clamp(1.5rem, 3vw, 2.5rem);
-  }
-}
-
-.statement-tag {
+.hero-staircase-note {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-  transition: color var(--transition-fast);
+  color: var(--text-muted);
 }
 
-.statement-tag-sep {
+/* ── Wide Cinematic Showreel Container ────────────────────────────────────── */
+/* Scroll-driven cinematic showreel between the hero and Our Approach. */
+.cinematic-track {
+  position: relative;
+  height: 400svh;
+  background: var(--bg-primary);
+}
+
+.cinematic-sticky-frame {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--bg-primary);
+}
+
+.cinematic-reveal-frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--bg-primary);
+  transform-origin: center;
+  will-change: clip-path, border-radius, transform;
+}
+
+.cinematic-media-motion {
+  position: absolute;
+  inset: -2%;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.intro-media-container,
+.intro-media-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #121413;
+}
+
+.intro-media-asset {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.intro-media-ending-frame {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.intro-media-controls {
+  position: absolute;
+  z-index: 3;
+  right: clamp(1rem, 2vw, 2rem);
+  bottom: clamp(1rem, 2vw, 2rem);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.intro-media-controls button {
+  min-height: 42px;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid rgba(250, 250, 248, 0.35);
+  border-radius: 999px;
+  color: #FAFAF8;
+  background: rgba(18, 19, 18, 0.68);
+  backdrop-filter: blur(12px);
+  font: 500 0.75rem/1 var(--font-mono);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+.intro-media-controls button:hover { background: rgba(18, 19, 18, 0.9); }
+.intro-media-controls button:focus-visible { outline: 2px solid #FAFAF8; outline-offset: 3px; }
+
+.cinematic-reduced-section {
+  padding: clamp(1.5rem, 4vw, 4.5rem);
+  background: var(--bg-primary);
+}
+
+.cinematic-reduced-frame {
+  position: relative;
+  width: min(100%, 1240px);
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: #121413;
+}
+
+@media (max-width: 1023px) {
+  .cinematic-track {
+    height: 340svh;
+  }
+
+  .hero-display-stack,
+  .hero-staircase-stack {
+    font-size: clamp(2.125rem, 5.4vw, 3.25rem);
+    line-height: 1.06;
+  }
+
+  .hero-asym-line-2 {
+    padding-left: clamp(1.5rem, 8vw, 4.5rem);
+  }
+
+  .hero-asym-line-3,
+  .hero-stair-2,
+  .hero-stair-3 {
+    padding-left: clamp(0.75rem, 4vw, 2.5rem);
+  }
+}
+
+/* ── Mobile Breakpoint (<= 767px) ─────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .cinematic-track {
+    height: 320svh;
+  }
+
+  .intro-media-asset,
+  .intro-media-ending-frame {
+    object-fit: contain;
+    background: #121413;
+  }
+
+  .intro-media-controls {
+    right: 1rem;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  .hero-display-stack,
+  .hero-staircase-stack,
+  .hero-swiss-right {
+    font-size: clamp(1.85rem, 8.2vw, 2.65rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-asym-line-2,
+  .hero-asym-line-3,
+  .hero-stair-2,
+  .hero-stair-3 {
+    padding-left: 0;
+    text-align: left;
+  }
+
+}
+
+
+/* ========================================================================
+   Our Approach — pinned, scroll-driven editorial typography
+   ======================================================================== */
+.approach-track {
+  position: relative;
+  height: 200svh;
+  isolation: isolate;
+  background: #FAFAF8;
+}
+
+.approach-sticky-frame {
+  position: sticky;
+  top: var(--header-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: calc(100vh - var(--header-height));
+  height: calc(100svh - var(--header-height));
+  min-height: 0;
+  overflow: hidden;
+  padding: clamp(1.25rem, 3.5vh, 2.5rem) clamp(1.25rem, 4vw, 4.5rem);
+  background: #FAFAF8;
+}
+
+.approach-top-rule {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  width: 100%;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-light);
+  color: #121312;
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  color: var(--border-medium);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
 }
 
-@media (min-width: 860px) {
-  .statement-tag-sep {
-    display: none; /* On desktop, the column layout replaces separators */
-  }
-}
+.approach-top-rule > span:first-child { flex: 0 0 auto; }
+.approach-rule-line { height: 1px; flex: 1; background: var(--border-light); }
 
-/* ── Bottom Frame-Entry Transition Zone ───────────────────────────────────── */
-/*
-  This zone sits at the bottom of the section.
-  It is NOT a footer — it is a spatial device.
-
-  The two corner marks communicate "a frame boundary is here."
-  When the Cinematic Media Frame is added in Step 5, it will slot
-  directly below this zone. The corner marks will appear to frame the top
-  edge of that media — giving the layout a composed, intentional quality.
-
-  The center cue is extremely subtle — a small mono label that
-  acknowledges the incoming content without spoiling it.
-*/
-.statement-frame-entry {
-  position: absolute;
-  bottom: 0;
-  left: clamp(1.25rem, 4vw, 4.5rem);
-  right: clamp(1.25rem, 4vw, 4.5rem);
-  height: clamp(3rem, 5vw, 4.5rem);
+.approach-copy {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding-bottom: clamp(1.25rem, 2.5vw, 2rem);
-  pointer-events: none;
-  user-select: none;
-}
-
-/* Corner marks — L-shaped bracket lines */
-.statement-frame-corner {
-  display: block;
-  width: 20px;
-  height: 20px;
-  border-color: var(--border-medium);
-  border-style: solid;
-  flex-shrink: 0;
-  opacity: 0.6;
-}
-
-.statement-frame-corner--bl {
-  border-width: 0 0 1px 1px;
-}
-
-.statement-frame-corner--br {
-  border-width: 0 1px 1px 0;
-}
-
-/* Center cue label */
-.statement-frame-center-cue {
-  display: flex;
-  align-items: flex-end;
   flex: 1;
+  flex-direction: column;
   justify-content: center;
-  padding-bottom: 2px;
+  width: min(100%, 1320px);
+  margin: 0 auto;
+  padding: clamp(0.5rem, 1.5vh, 1.25rem) 0;
 }
 
-.statement-frame-label {
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  opacity: 0.7;
+.approach-story-stage {
+  position: relative;
+  width: 100%;
+  height: clamp(19rem, 48vh, 40rem);
+  perspective: 1200px;
+  transform-style: preserve-3d;
 }
 
-/* ── Responsive Adjustments ───────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .statement-line--left,
-  .statement-line--right {
-    /* On mobile, the asymmetric indent is removed — type fills the viewport */
-    padding-left: 0;
-    font-size: clamp(2rem, 9.5vw, 3rem);
-  }
-
-  .statement-line--resolve {
-    font-size: clamp(1.25rem, 5.5vw, 2rem);
-    padding-left: 0;
-  }
-
-  .statement-frame-corner {
-    width: 14px;
-    height: 14px;
-  }
+.approach-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
-@media (max-width: 480px) {
-  .statement-line--left,
-  .statement-line--right {
-    font-size: clamp(1.75rem, 10vw, 2.5rem);
-    line-height: 0.94;
-  }
+.approach-story-heading {
+  width: 100%;
+  margin: 0;
+  color: #121312;
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 10.2vw, 9.25rem);
+  font-weight: 650;
+  line-height: 1.02;
+  letter-spacing: -0.075em;
+  transform-style: preserve-3d;
 }
 
+.approach-story-heading--two-line {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
+.approach-headline-line { display: block; transform-origin: left center; }
+.approach-headline-line--second { display: flex; gap: 0.22em; margin-left: clamp(1.5rem, 10vw, 9rem); }
+.approach-presence { display: inline-block; }
+
+.approach-story-heading--flip { perspective: 1000px; }
+.approach-flip-row {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 1.08em;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+.approach-flip-face {
+  position: absolute;
+  inset: 0 auto auto 0;
+  display: block;
+  width: 100%;
+  height: 1.08em;
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+  white-space: nowrap;
+}
+.approach-flip-face--old { translate: 0 0 0.54em; }
+.approach-flip-face--new { translate: 0 0 0.54em; }
+.approach-scene--two .approach-flip-row:nth-child(2) { margin-left: clamp(1.5rem, 10vw, 9rem); }
+
+.approach-story-heading--final {
+  display: flex;
+  flex-direction: column;
+  gap: 0.02em;
+  font-size: clamp(6rem, 12vw, 10.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.08em;
+  transform-origin: 0% 55%;
+}
+.approach-story-heading--final span:last-child { margin-left: clamp(2rem, 13vw, 12rem); }
+
+.approach-description-stage {
+  position: relative;
+  min-height: clamp(4rem, 8vh, 5.75rem);
+  margin-top: clamp(0.5rem, 1vh, 1rem);
+  perspective: 900px;
+}
+.approach-story-description {
+  position: absolute;
+  inset: 0 auto auto 0;
+  max-width: 58ch;
+  margin: 0;
+  color: #121312;
+  font-family: var(--font-sans);
+  font-size: clamp(1.375rem, 2vw, 1.875rem);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+  will-change: transform, opacity;
+}
+.approach-story-description--final { max-width: 54ch; }
+
+.approach-bottom-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: min(100%, 1320px);
+  margin: 0 auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-light);
+  will-change: transform, opacity;
+}
+.approach-work-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: #121312;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity var(--transition-fast);
+}
+.approach-work-link:hover { opacity: 0.62; }
+
+.approach-static {
+  width: 100%;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 4.5rem);
+  background: #FAFAF8;
+}
+.approach-static-content { width: min(100%, 1320px); margin: 0 auto; }
+.approach-static-scene { padding: clamp(1.75rem, 5vh, 3.25rem) 0; border-bottom: 1px solid var(--border-light); }
+.approach-static-scene h2 {
+  margin: 0;
+  color: #121312;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.07em;
+}
+.approach-static-scene p {
+  max-width: 58ch;
+  margin: 0.9rem 0 0;
+  color: #121312;
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  line-height: 1.45;
+}
+.approach-static .approach-bottom-content { padding-top: 1rem; border-top: 0; }
+.approach-accessible-copy a:focus {
+  position: fixed;
+  z-index: 1000;
+  inset: 1rem auto auto 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.75rem 1rem;
+  overflow: visible;
+  clip: auto;
+  color: #121312;
+  background: #FAFAF8;
+  outline: 2px solid #121312;
+}
+
+@media (max-width: 1023px) {
+  .approach-track { height: 180svh; }
+  .approach-story-stage { height: clamp(17rem, 42vh, 29rem); }
+  .approach-story-heading { font-size: clamp(4.75rem, 10.2vw, 8rem); }
+  .approach-story-heading--final { font-size: clamp(5.5rem, 12vw, 9rem); }
+  .approach-story-description { font-size: clamp(1.3rem, 2.5vw, 1.7rem); }
+}
+
+@media (max-width: 767px) {
+  .approach-track { height: 165svh; }
+  .approach-sticky-frame { padding: 1rem 1.25rem; }
+  .approach-top-rule { gap: 0.75rem; padding-bottom: 0.6rem; font-size: 0.625rem; }
+  .approach-story-stage { height: clamp(12rem, 32vh, 18rem); perspective: 750px; }
+  .approach-story-heading { font-size: clamp(2.5rem, 10.8vw, 4.4rem); line-height: 1.06; letter-spacing: -0.075em; }
+  .approach-headline-line--second { gap: 0.16em; margin-left: clamp(1.25rem, 8vw, 3.5rem); }
+  .approach-flip-face { height: 1.08em; }
+  .approach-flip-face--old { translate: 0 0 0.54em; }
+  .approach-flip-face--new { translate: 0 0 0.54em; }
+  .approach-scene--two .approach-flip-row:nth-child(2) { margin-left: clamp(1.25rem, 8vw, 3.5rem); }
+  .approach-story-heading--final { gap: 0.08em; font-size: clamp(3.3rem, 13.2vw, 5.25rem); line-height: 1; }
+  .approach-story-heading--final span:last-child { margin-left: clamp(1.5rem, 11vw, 4rem); }
+  .approach-description-stage { min-height: 5.5rem; margin-top: 0.3rem; }
+  .approach-story-description { max-width: 38ch; font-size: clamp(1.05rem, 4.3vw, 1.3rem); line-height: 1.42; }
+  .approach-bottom-content { padding-top: 0.5rem; }
+  .approach-work-link { min-height: 42px; }
+  .approach-static-scene { padding: 1.5rem 0; }
+  .approach-static-scene h2 { font-size: clamp(2.5rem, 10.5vw, 4rem); }
+}
+
+@media (max-height: 650px) and (min-width: 768px) {
+  .approach-sticky-frame { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+  .approach-story-stage { height: 36vh; min-height: 13rem; }
+  .approach-story-heading { font-size: clamp(3.75rem, 8.5vh, 6.5rem); }
+  .approach-story-heading--final { font-size: clamp(4.5rem, 10vh, 7.5rem); }
+  .approach-story-description { font-size: clamp(1.2rem, 2.4vh, 1.6rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .approach-story-heading,
+  .approach-headline-line,
+  .approach-flip-face,
+  .approach-story-description { will-change: auto; }
+}

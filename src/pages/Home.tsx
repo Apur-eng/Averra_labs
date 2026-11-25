@@ -1,5 +1,6 @@
 import React from 'react';
 import { HeroSection } from '../components/sections/HeroSection';
+import { CinematicShowreel } from '../components/sections/CinematicShowreel';
 import { StatementSection } from '../components/sections/StatementSection';
 import { CapabilitiesSection } from '../components/sections/CapabilitiesSection';
 import { SelectedWorkSection } from '../components/sections/SelectedWorkSection';
@@ -11,8 +12,8 @@ import { FinalCtaSection } from '../components/sections/FinalCtaSection';
 /*
  * Page Sequence:
  *   HeroSection
+ *   CinematicShowreel      ← scroll-driven editorial-to-fullscreen transition
  *   StatementSection       ← narrative manifesto
- *   [Step 5: CinematicMediaSection]  ← future cinematic media frame slot
  *   SelectedWorkSection
  *   CapabilitiesSection
  *   ProcessSection
@@ -24,8 +25,8 @@ export const Home: React.FC = () => {
   return (
     <div className="page-home">
       <HeroSection />
+      <CinematicShowreel />
       <StatementSection />
-      {/* Step 5 slot: CinematicMediaSection goes here */}
       <SelectedWorkSection />
       <CapabilitiesSection />
       <ProcessSection />

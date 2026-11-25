@@ -1,227 +1,305 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from 'framer-motion';
 import { ArrowRight, ArrowDownRight } from 'lucide-react';
 import { Button } from '../ui/Button';
-import { IntroMedia } from '../ui/IntroMedia';
+import { useLenis } from '../../motion/lenis/useLenis';
+
+export type HeroVariant = 'asymmetric' | 'swiss-split' | 'staircase';
+
+const VARIANT_OPTIONS: { id: HeroVariant; code: string; label: string }[] = [
+  { id: 'asymmetric', code: '01', label: 'Asymmetric Cascade' },
+  { id: 'swiss-split', code: '02', label: 'Swiss Split' },
+  { id: 'staircase', code: '03', label: 'Stepped Staircase' },
+];
+
+function getInitialVariant(): HeroVariant {
+  if (typeof window === 'undefined') return 'asymmetric';
+  const param = new URLSearchParams(window.location.search).get('hero');
+  if (param === 'swiss-split' || param === '2') return 'swiss-split';
+  if (param === 'staircase' || param === '3') return 'staircase';
+  return 'asymmetric';
+}
 
 export const HeroSection: React.FC = () => {
   const containerRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  const { scrollTo } = useLenis();
+  const [variant, setVariant] = useState<HeroVariant>(getInitialVariant);
 
-  // Subtle scroll-driven physicality (restrained, architectural depth)
+  // Seamless scroll-driven transition: typography lifts & softens while the cinematic showreel expands into focus
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start start', 'end start']
+    offset: ['start start', 'end start'],
   });
 
-  const headlineY = useTransform(
+  const typographyY = useTransform(
     scrollYProgress,
-    [0, 1],
-    shouldReduceMotion ? [0, 0] : [0, -28]
+    [0, 0.7],
+    shouldReduceMotion ? [0, 0] : [0, -44]
   );
 
-  const mediaY = useTransform(
+  const typographyOpacity = useTransform(
     scrollYProgress,
-    [0, 1],
-    shouldReduceMotion ? [0, 0] : [0, 20]
+    [0, 0.55],
+    shouldReduceMotion ? [1, 1] : [1, 0.35]
   );
 
-  // Architectural easing: dignified deceleration curve
-  const transitionConfig = shouldReduceMotion
-    ? { duration: 0 }
-    : { duration: 0.75, ease: [0.16, 1, 0.3, 1] };
+  const easeArchitectural = [0.16, 1, 0.3, 1] as const;
 
-  // Masked line reveal for substantial, controlled headline entrance
-  const lineVariants = {
-    hidden: { y: '100%', opacity: 0 },
-    visible: (custom: number) => ({
-      y: 0,
+  // Short, crisp masked line reveals
+  const maskLineVariants = {
+    hidden: { y: shouldReduceMotion ? '0%' : '105%', opacity: shouldReduceMotion ? 1 : 0 },
+    visible: (index: number) => ({
+      y: '0%',
       opacity: 1,
-      transition: {
-        ...transitionConfig,
-        delay: shouldReduceMotion ? 0 : 0.15 + (custom - 1) * 0.1
-      }
-    })
+      transition: shouldReduceMotion
+        ? { duration: 0 }
+        : {
+            duration: 0.65,
+            ease: easeArchitectural,
+            delay: 0.08 + index * 0.065,
+          },
+    }),
   };
 
-  // Subtle upward fade for metadata, supporting text, and media
   const fadeVariants = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 16 },
-    visible: (custom: number) => ({
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 12 },
+    visible: (delaySteps: number) => ({
       opacity: 1,
       y: 0,
-      transition: {
-        ...transitionConfig,
-        delay: shouldReduceMotion ? 0 : custom * 0.1
-      }
-    })
+      transition: shouldReduceMotion
+        ? { duration: 0 }
+        : {
+            duration: 0.55,
+            ease: easeArchitectural,
+            delay: delaySteps * 0.07,
+          },
+    }),
+  };
+
+  const handleExploreWork = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const target = document.getElementById('work');
+    if (target) {
+      e.preventDefault();
+      scrollTo(target, { offset: -24 });
+    }
+  };
+
+  const handleVariantChange = (nextVariant: HeroVariant) => {
+    setVariant(nextVariant);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.set('hero', nextVariant);
+      window.history.replaceState({}, '', url.toString());
+    }
   };
 
   return (
-    <section ref={containerRef} className="hero-editorial-section" id="hero">
-      {/* 1. Small Technical Metadata / Eyebrow Row */}
+    <section
+      ref={containerRef}
+      className={`hero-editorial-section hero-variant--${variant}`}
+      id="hero"
+      aria-label="Averra Labs Hero"
+    >
+      {/* 1. Compact Architectural Top Bar + Prototype Variation Switcher */}
       <motion.div
         className="hero-top-strip"
         initial="hidden"
         animate="visible"
-        custom={0.5}
+        custom={0}
         variants={fadeVariants}
       >
         <div className="hero-meta-item">
-          <span className="hero-meta-dot" />
-          <span>STUDIO // 01</span>
-          <span className="hero-meta-divider">/</span>
-          <span>DIGITAL PRODUCT ENGINEERING</span>
+          <span className="hero-meta-dot" aria-hidden="true" />
+          <span>AVERRA LABS</span>
+          <span className="hero-meta-divider" aria-hidden="true">/</span>
+          <span>DIGITAL PRODUCT STUDIO</span>
         </div>
 
-        <div className="hero-meta-item desktop-only">
-          <span>“WE BUILD. YOU GROW.”</span>
-          <span className="hero-meta-divider">/</span>
-          <span>AVAILABILITY: Q3/Q4</span>
-        </div>
-
-        <div className="hero-meta-item desktop-only">
-          <span>COORD // 28°36'N 77°12'E</span>
+        {/* Prototype Layout Variation Switcher (A / B / C) */}
+        <div className="hero-variant-switcher" role="group" aria-label="Hero typography variations">
+          <span className="hero-variant-prefix desktop-only">LAYOUT //</span>
+          {VARIANT_OPTIONS.map((opt) => {
+            const isActive = variant === opt.id;
+            return (
+              <button
+                key={opt.id}
+                type="button"
+                onClick={() => handleVariantChange(opt.id)}
+                aria-pressed={isActive}
+                className={`hero-variant-btn ${isActive ? 'active' : ''}`}
+                title={`Variation ${opt.code}: ${opt.label}`}
+              >
+                <span className="hero-variant-code">{opt.code}</span>
+                <span className="hero-variant-name desktop-only">{opt.label}</span>
+              </button>
+            );
+          })}
         </div>
       </motion.div>
 
-      {/* 2. Main Headline (Substantial, Controlled Asymmetry) */}
+      {/* 2. Typography & CTA Composition (3 Variations, Same Exact Offerings) */}
       <motion.div
-        className="hero-headline-wrap"
-        style={{ y: headlineY }}
+        key={variant}
+        className="hero-composition"
+        style={{ y: typographyY, opacity: typographyOpacity }}
         initial="hidden"
         animate="visible"
       >
-        <h1 className="hero-giant-title">
-          {/* Line 1: Left-anchored */}
-          <span className="hero-headline-line hero-line-1">
-            <motion.span
-              style={{ display: 'inline-block' }}
-              custom={1}
-              variants={lineVariants}
-            >
-              DIGITAL
-            </motion.span>
-          </span>
+        {variant === 'asymmetric' && (
+          <div className="hero-layout-asymmetric">
+            <div className="hero-asymmetric-top">
+              <div className="hero-kicker-mask">
+                <motion.p className="hero-lead-kicker" custom={0} variants={maskLineVariants}>
+                  We build<span className="hero-accent-dot">.</span>
+                </motion.p>
+              </div>
 
-          {/* Line 2: Left-anchored */}
-          <span className="hero-headline-line hero-line-2">
-            <motion.span
-              style={{ display: 'inline-block' }}
-              custom={2}
-              variants={lineVariants}
-            >
-              PRODUCTS
-            </motion.span>
-          </span>
+              <motion.div className="hero-aside-meta" custom={3.5} variants={fadeVariants}>
+                <p className="hero-tagline">
+                  Designed to impress. <strong>Engineered to perform.</strong>
+                </p>
+                <div className="hero-actions">
+                  <Button to="/contact" variant="primary" size="md" icon={<ArrowRight size={16} />}>
+                    Start a Project
+                  </Button>
+                  <a href="#work" className="hero-work-link" onClick={handleExploreWork}>
+                    <span>Explore Our Work</span>
+                    <ArrowDownRight size={14} />
+                  </a>
+                </div>
+              </motion.div>
+            </div>
 
-          {/* Line 3: Indented horizontal asymmetry */}
-          <span className="hero-headline-line hero-line-3">
-            <motion.span
-              style={{ display: 'inline-block' }}
-              custom={3}
-              variants={lineVariants}
-            >
-              BUILT TO GROW<span className="hero-accent-dot">.</span>
-            </motion.span>
-          </span>
-        </h1>
+            <h1 className="hero-display-stack" aria-label="We build Websites, Mobile Apps, SaaS and AI-Powered Assistants">
+              <span className="hero-line-mask hero-asym-line-1">
+                <motion.span className="hero-line-inner" custom={1} variants={maskLineVariants}>
+                  Websites<span className="hero-accent-dot">.</span>
+                </motion.span>
+              </span>
+              <span className="hero-line-mask hero-asym-line-2">
+                <motion.span className="hero-line-inner" custom={2} variants={maskLineVariants}>
+                  Mobile Apps<span className="hero-accent-dot">.</span>
+                </motion.span>
+              </span>
+              <span className="hero-line-mask hero-asym-line-3">
+                <motion.span className="hero-line-inner" custom={3} variants={maskLineVariants}>
+                  SaaS &amp; <span className="hero-accent-text">AI-Powered Assistants</span>
+                  <span className="hero-accent-dot">.</span>
+                </motion.span>
+              </span>
+            </h1>
+          </div>
+        )}
+
+        {variant === 'swiss-split' && (
+          <div className="hero-layout-swiss">
+            <motion.div className="hero-swiss-left" custom={1} variants={fadeVariants}>
+              <div className="hero-kicker-mask">
+                <motion.p className="hero-lead-kicker hero-lead-kicker--lg" custom={0} variants={maskLineVariants}>
+                  We build
+                </motion.p>
+              </div>
+              <p className="hero-tagline hero-tagline--swiss">
+                Designed to impress.
+                <br />
+                <strong>Engineered to perform.</strong>
+              </p>
+              <div className="hero-actions">
+                <Button to="/contact" variant="primary" size="md" icon={<ArrowRight size={16} />}>
+                  Start a Project
+                </Button>
+                <a href="#work" className="hero-work-link" onClick={handleExploreWork}>
+                  <span>Explore Our Work</span>
+                  <ArrowDownRight size={14} />
+                </a>
+              </div>
+            </motion.div>
+
+            <h1 className="hero-swiss-right" aria-label="We build Websites, Mobile Apps, SaaS and AI-Powered Assistants">
+              <span className="hero-swiss-row">
+                <span className="hero-swiss-idx">01</span>
+                <span className="hero-line-mask">
+                  <motion.span className="hero-line-inner" custom={1} variants={maskLineVariants}>
+                    Websites.
+                  </motion.span>
+                </span>
+              </span>
+              <span className="hero-swiss-row">
+                <span className="hero-swiss-idx">02</span>
+                <span className="hero-line-mask">
+                  <motion.span className="hero-line-inner" custom={2} variants={maskLineVariants}>
+                    Mobile Apps.
+                  </motion.span>
+                </span>
+              </span>
+              <span className="hero-swiss-row hero-swiss-row--accent">
+                <span className="hero-swiss-idx">03</span>
+                <span className="hero-line-mask">
+                  <motion.span className="hero-line-inner" custom={3} variants={maskLineVariants}>
+                    SaaS &amp; <span className="hero-accent-text">AI-Powered Assistants</span>.
+                  </motion.span>
+                </span>
+              </span>
+            </h1>
+          </div>
+        )}
+
+        {variant === 'staircase' && (
+          <div className="hero-layout-staircase">
+            <div className="hero-staircase-header">
+              <div className="hero-kicker-mask">
+                <motion.p className="hero-lead-kicker" custom={0} variants={maskLineVariants}>
+                  We build
+                </motion.p>
+              </div>
+              <motion.p className="hero-tagline" custom={1} variants={fadeVariants}>
+                Designed to impress. <strong>Engineered to perform.</strong>
+              </motion.p>
+            </div>
+
+            <h1 className="hero-staircase-stack" aria-label="We build Websites, Mobile Apps, SaaS and AI-Powered Assistants">
+              <span className="hero-line-mask hero-stair-1">
+                <motion.span className="hero-line-inner" custom={1} variants={maskLineVariants}>
+                  Websites<span className="hero-accent-dot">.</span>
+                </motion.span>
+              </span>
+              <span className="hero-line-mask hero-stair-2">
+                <motion.span className="hero-line-inner" custom={2} variants={maskLineVariants}>
+                  Mobile Apps<span className="hero-accent-dot">.</span>
+                </motion.span>
+              </span>
+              <span className="hero-line-mask hero-stair-3">
+                <motion.span className="hero-line-inner" custom={3} variants={maskLineVariants}>
+                  SaaS &amp; <span className="hero-accent-text">AI-Powered Assistants</span>
+                  <span className="hero-accent-dot">.</span>
+                </motion.span>
+              </span>
+            </h1>
+
+            <motion.div className="hero-staircase-footer" custom={4} variants={fadeVariants}>
+              <div className="hero-actions">
+                <Button to="/contact" variant="primary" size="md" icon={<ArrowRight size={16} />}>
+                  Start a Project
+                </Button>
+                <a href="#work" className="hero-work-link" onClick={handleExploreWork}>
+                  <span>Explore Our Work</span>
+                  <ArrowDownRight size={14} />
+                </a>
+              </div>
+              <div className="hero-staircase-note desktop-only">
+                <span>SCROLL FOR SHOWREEL &amp; SELECTED WORK</span>
+              </div>
+            </motion.div>
+          </div>
+        )}
       </motion.div>
 
-      {/* 3. Supporting Description & Actions Row */}
-      <div className="hero-supporting-row">
-        {/* Left Column: Editorial Statement */}
-        <motion.div
-          className="hero-editorial-col"
-          initial="hidden"
-          animate="visible"
-          custom={4.8}
-          variants={fadeVariants}
-        >
-          <div className="hero-editorial-badge">
-            <span>01 // PERSPECTIVE</span>
-            <span className="hero-meta-divider">—</span>
-            <span>MEASURED LONGEVITY</span>
-          </div>
-
-          <p className="hero-editorial-lead">
-            Averra is an independent product and systems engineering studio partnering with founders and ambitious organizations. 
-            We combine <strong>strategic product thinking</strong>, <strong>editorial design craft</strong>, and <strong>hardened engineering</strong> to build enduring software that commands authority.
-          </p>
-        </motion.div>
-
-        {/* Right Column: Actions & Discipline Badges */}
-        <motion.div
-          className="hero-actions-col"
-          initial="hidden"
-          animate="visible"
-          custom={5.6}
-          variants={fadeVariants}
-        >
-          <div className="hero-actions">
-            <Button
-              to="/contact"
-              variant="primary"
-              size="md"
-              icon={<ArrowRight size={16} />}
-            >
-              Start a Project
-            </Button>
-
-            <a
-              href="#work"
-              className="hero-work-link"
-              onClick={(e) => {
-                const target = document.getElementById('work');
-                if (target) {
-                  e.preventDefault();
-                  target.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-            >
-              <span>View Selected Work</span>
-              <ArrowDownRight size={14} />
-            </a>
-          </div>
-
-          <div className="hero-discipline-tags">
-            <span className="hero-tag-item">[ 01 STRATEGY ]</span>
-            <span className="hero-tag-item">[ 02 CRAFT & SYSTEMS ]</span>
-            <span className="hero-tag-item">[ 03 PRODUCTION ENGINEERING ]</span>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* 4. Wide Commanding Intro Media Viewport */}
-      <motion.div
-        className="hero-media-wrap"
-        style={{ y: mediaY }}
-        initial="hidden"
-        animate="visible"
-        custom={6.6}
-        variants={fadeVariants}
-      >
-        <IntroMedia
-          placeholderImage="/images/intro-monolith.jpg"
-          label="INTRO VIDEO"
-          aspectRatio="16 / 9"
-          maxWidth="100%"
-          caption="Averra Cinematic Visual — 4K Monolith Master (Future Insertion Slot)"
-        />
-      </motion.div>
-
-      {/* 5. Bottom Technical Coordinate Strip */}
-      <motion.div
-        className="hero-bottom-strip"
-        initial="hidden"
-        animate="visible"
-        custom={7.8}
-        variants={fadeVariants}
-      >
-        <div>AVERRA STUDIO SYSTEM // EDITION 2026</div>
-        <div>SCALE // 1:1 ARCHITECTURAL GRID</div>
-        <div>ENDURING PRODUCTS ONLY</div>
-      </motion.div>
     </section>
   );
 };
